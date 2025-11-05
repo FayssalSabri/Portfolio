@@ -121,31 +121,38 @@ const Portfolio = () => {
 
   const certifications = [
     { 
-      name: "Machine Learning Specialization", 
-      org: "Stanford",
-      link: "https://www.coursera.org/account/accomplishments/specialization/certificate/YOUR_CERT_ID"
+      name: "Deep Learning & Keras", 
+      issuer: "Coursera", 
+      link: "https://www.coursera.org/account/accomplishments/verify/PT37U2NJCWDR", 
     },
     { 
-      name: "Deep Learning Specialization", 
-      org: "Coursera",
-      link: "https://www.coursera.org/account/accomplishments/specialization/certificate/YOUR_CERT_ID"
-    },
-    { 
-      name: "SQL for Data Science", 
-      org: "IBM",
-      link: "https://www.coursera.org/account/accomplishments/certificate/YOUR_CERT_ID"
-    },
-    { 
-      name: "Certified Lean Management Professional", 
-      org: "Professional",
-      link: "#"
+      name: "Advanced SQL", 
+      issuer: "365 Data Science", 
+      link: "https://learn.365datascience.com/certificates/CC-FF10CFFD9D/", 
     },
     { 
       name: "Git & GitHub", 
-      org: "Coursera",
-      link: "https://www.coursera.org/account/accomplishments/certificate/YOUR_CERT_ID"
-    }
+      issuer: "365 Data Science", 
+      link: "https://learn.365datascience.com/certificates/CC-6FB9E230D9/", 
+    },
+    { 
+      name: "Machine Learning Specialization (Stanford University)", 
+      issuer: "Stanford (Coursera)", 
+      link: "https://www.coursera.org/account/accomplishments/specialization/VF663RCLC57N", 
+    },
+    { 
+      name: "Certified Lean Management Professional", 
+      issuer: "Udemy", 
+      link: "https://www.udemy.com/certificate/UC-7553a73d-7a62-4d32-983f-20b2d6f470ca/", 
+    },
+
+    { 
+      name: " Kanban+Agile Kanban Productivity & Efficiency+Agile Scrum", 
+      issuer: "Udemy", 
+      link: "https://www.udemy.com/certificate/UC-9cd64e94-cdd1-43b3-a548-d1cf5ed2f1d6/", 
+    },
   ];
+
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
