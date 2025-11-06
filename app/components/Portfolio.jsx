@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Moon, Sun, Github, Linkedin, Mail, MapPin, Briefcase, GraduationCap, Award, Code, Database, Brain, Cloud, ChevronDown, ExternalLink, Menu, X, ArrowRight, Sparkles, Target } from 'lucide-react';
+import { Moon, Sun, Github, Linkedin, Mail, MapPin, Briefcase, GraduationCap, Award, Code, Database, Brain, Cloud, ChevronDown, ExternalLink, Menu, X, ArrowRight, Sparkles, Target, Users, TrendingUp, Zap, Shield, Activity, BookOpen, Lightbulb, Rocket } from 'lucide-react';
 
 const Portfolio = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -41,7 +41,8 @@ const Portfolio = () => {
         "Designed multi-agent LLM solution for enhanced model explainability (XAI)",
         "Leveraged Python, Scikit-Learn, TensorFlow, and MLOps best practices"
       ],
-      color: "blue"
+      color: "blue",
+      icon: Shield
     },
     {
       title: "Developer - Industrial Chatbot (RAG)",
@@ -53,7 +54,8 @@ const Portfolio = () => {
         "Deployed prototype via REST API for seamless integration",
         "Used Python, LangChain, LLaMA 3, and ChromaDB"
       ],
-      color: "purple"
+      color: "purple",
+      icon: Brain
     },
     {
       title: "Computer Vision Engineer",
@@ -65,7 +67,8 @@ const Portfolio = () => {
         "Industrialized PoC for production team integration",
         "Applied Python, OpenCV, YOLOv5, and TensorFlow"
       ],
-      color: "indigo"
+      color: "indigo",
+      icon: Activity
     }
   ];
 
@@ -76,15 +79,38 @@ const Portfolio = () => {
       description: "Built complete CI/CD pipeline with MLflow for automated training, versioning, and deployment. Includes model monitoring, A/B testing, and automated retraining triggers.",
       tech: "Python, Scikit-Learn, FastAPI, Docker, MLflow, GitHub Actions, GCP",
       icon: Cloud,
-      gradient: "from-blue-500 to-cyan-500"
+      gradient: "from-blue-500 to-cyan-500",
+      impact: "Reduced deployment time by 60%"
+    },
+    {
+      title: "Revue Systématique IA & NVH",
+      subtitle: "AI Consulting Study for Stellantis",
+      description: "Led team in conducting systematic review of AI applications in NVH (Noise, Vibration, Harshness) modeling. Synthesized cutting-edge research and presented actionable insights to Stellantis engineering teams.",
+      tech: "Python, TensorFlow, Signal Processing, Research Analysis, Technical Reporting",
+      icon: Users,
+      gradient: "from-emerald-500 to-teal-500",
+      impact: "Delivered to Stellantis engineers",
+      institution: "École Centrale de Lyon & Stellantis",
+      period: "Dec 2024 – Apr 2025",
+      role: "Team Leader"
     },
     {
       title: "PredictFlow",
       subtitle: "Predictive Maintenance System",
       description: "Developed LSTM model for equipment failure prediction from sensor data. Real-time monitoring dashboard with 92% accuracy in failure detection 24 hours in advance.",
       tech: "Python, TensorFlow (Keras), Pandas, Scikit-Learn, Streamlit, Docker",
+      icon: TrendingUp,
+      gradient: "from-purple-500 to-pink-500",
+      impact: "92% accuracy, 24h advance warning"
+    },
+    {
+      title: "SmartCancer Detector",
+      subtitle: "Medical AI Diagnostic Tool",
+      description: "Implemented intelligent application for early cancer detection across breast, skin, and lung cancer types. Leveraged deep learning models trained on medical imaging datasets with transfer learning techniques.",
+      tech: "Python, TensorFlow, Keras, CNNs, Medical Imaging, Transfer Learning",
       icon: Brain,
-      gradient: "from-purple-500 to-pink-500"
+      gradient: "from-rose-500 to-pink-500",
+      impact: "Multi-cancer classification system"
     },
     {
       title: "RecomSys-Flix",
@@ -92,18 +118,28 @@ const Portfolio = () => {
       description: "Implemented hybrid recommendation system combining collaborative filtering with neural embeddings. Containerized REST API serving 1000+ requests/min on AWS EC2.",
       tech: "Python, PyTorch, Pandas, FastAPI, Docker, AWS (EC2)",
       icon: Code,
-      gradient: "from-orange-500 to-red-500"
+      gradient: "from-orange-500 to-red-500",
+      impact: "1000+ req/min throughput"
+    },
+    {
+      title: "Multi-Agent RL System",
+      subtitle: "Cooperative Intelligence Research",
+      description: "Explored cooperative behavior among agents using Q-Learning and Actor-Critic algorithms. Developed custom OpenAI Gym environment to simulate multi-agent scenarios and emergent behaviors.",
+      tech: "Python, PyTorch, OpenAI Gym, Q-Learning, Actor-Critic, RL",
+      icon: Lightbulb,
+      gradient: "from-violet-500 to-purple-500",
+      impact: "Research in cooperative AI"
     }
   ];
 
   const skills = {
     "AI & Machine Learning": {
-      items: ["Machine Learning", "Deep Learning", "NLP", "Computer Vision", "MLOps"],
+      items: ["Machine Learning", "Deep Learning", "NLP", "Computer Vision", "MLOps", "Reinforcement Learning"],
       icon: Brain,
       color: "blue"
     },
     "Frameworks & Libraries": {
-      items: ["Scikit-Learn", "PyTorch", "TensorFlow", "HuggingFace", "LangChain"],
+      items: ["Scikit-Learn", "PyTorch", "TensorFlow", "HuggingFace", "LangChain", "Keras"],
       icon: Code,
       color: "purple"
     },
@@ -113,7 +149,7 @@ const Portfolio = () => {
       color: "emerald"
     },
     "Cloud & DevOps": {
-      items: ["Docker", "Kubernetes", "FastAPI", "Git", "AWS", "GCP", "MLflow"],
+      items: ["Docker", "Kubernetes", "FastAPI", "Git", "AWS", "GCP", "MLflow", "CI/CD"],
       icon: Cloud,
       color: "sky"
     }
@@ -121,38 +157,42 @@ const Portfolio = () => {
 
   const certifications = [
     { 
+      name: "Machine Learning Specialization", 
+      issuer: "Stanford University (Coursera)", 
+      link: "https://www.coursera.org/account/accomplishments/specialization/VF663RCLC57N",
+      icon: Award
+    },
+    { 
       name: "Deep Learning & Keras", 
       issuer: "Coursera", 
-      link: "https://www.coursera.org/account/accomplishments/verify/PT37U2NJCWDR", 
+      link: "https://www.coursera.org/account/accomplishments/verify/PT37U2NJCWDR",
+      icon: Brain
     },
     { 
       name: "Advanced SQL", 
       issuer: "365 Data Science", 
-      link: "https://learn.365datascience.com/certificates/CC-FF10CFFD9D/", 
+      link: "https://learn.365datascience.com/certificates/CC-FF10CFFD9D/",
+      icon: Database
     },
     { 
       name: "Git & GitHub", 
       issuer: "365 Data Science", 
-      link: "https://learn.365datascience.com/certificates/CC-6FB9E230D9/", 
-    },
-    { 
-      name: "Machine Learning Specialization (Stanford University)", 
-      issuer: "Stanford (Coursera)", 
-      link: "https://www.coursera.org/account/accomplishments/specialization/VF663RCLC57N", 
+      link: "https://learn.365datascience.com/certificates/CC-6FB9E230D9/",
+      icon: Code
     },
     { 
       name: "Certified Lean Management Professional", 
       issuer: "Udemy", 
-      link: "https://www.udemy.com/certificate/UC-7553a73d-7a62-4d32-983f-20b2d6f470ca/", 
+      link: "https://www.udemy.com/certificate/UC-7553a73d-7a62-4d32-983f-20b2d6f470ca/",
+      icon: TrendingUp
     },
-
     { 
-      name: " Kanban+Agile Kanban Productivity & Efficiency+Agile Scrum", 
+      name: "Kanban + Agile Scrum Methodology", 
       issuer: "Udemy", 
-      link: "https://www.udemy.com/certificate/UC-9cd64e94-cdd1-43b3-a548-d1cf5ed2f1d6/", 
+      link: "https://www.udemy.com/certificate/UC-9cd64e94-cdd1-43b3-a548-d1cf5ed2f1d6/",
+      icon: Users
     },
   ];
-
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -166,6 +206,28 @@ const Portfolio = () => {
     <div className={darkMode ? 'dark' : ''}>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-slate-900 text-gray-900 dark:text-white transition-colors duration-500">
 
+        {/* Animated Background Elements */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 90, 0],
+              opacity: [0.03, 0.05, 0.03]
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-blue-400 to-purple-600 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1.2],
+              rotate: [90, 0, 90],
+              opacity: [0.03, 0.05, 0.03]
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-pink-400 to-blue-600 rounded-full blur-3xl"
+          />
+        </div>
+
         {/* Navigation */}
         <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrollY > 50 
@@ -177,7 +239,8 @@ const Portfolio = () => {
               <motion.div 
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="text-2xl font-bold"
+                className="text-2xl font-bold cursor-pointer"
+                onClick={() => scrollToSection('hero')}
               >
                 <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                   FS
@@ -249,8 +312,8 @@ const Portfolio = () => {
         </nav>
 
         {/* Hero Section */}
-        <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20">
-          <div className="max-w-5xl mx-auto text-center">
+        <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20 relative">
+          <div className="max-w-5xl mx-auto text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -360,8 +423,8 @@ const Portfolio = () => {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-24 px-6 bg-white/50 dark:bg-gray-800/30">
-          <div className="max-w-6xl mx-auto">
+        <section id="about" className="py-24 px-6 bg-white/50 dark:bg-gray-800/30 relative">
+          <div className="max-w-6xl mx-auto relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -378,7 +441,7 @@ const Portfolio = () => {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -397,6 +460,12 @@ const Portfolio = () => {
                     <h4 className="font-bold text-lg mb-1">M.Sc. Data & AI in Industrial Engineering</h4>
                     <p className="text-gray-700 dark:text-gray-300 font-medium">École Centrale de Lyon</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">2024-2025 • Lyon, France</p>
+                  </div>
+                  <div className="pl-4 border-l-2 border-emerald-500">
+                    <h4 className="font-bold text-lg mb-1">DESECL - Industrial Risk Management Engineering</h4>
+                    <p className="text-gray-700 dark:text-gray-300 font-medium">École Centrale de Lyon</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">2024-2025 • Lyon, France</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">Specialized training in industrial risk management and safety strategies</p>
                   </div>
                   <div className="pl-4 border-l-2 border-purple-500">
                     <h4 className="font-bold text-lg mb-1">State Engineer - AI & Data Science</h4>
@@ -427,6 +496,34 @@ const Portfolio = () => {
                 </p>
               </motion.div>
             </div>
+
+            {/* Key Strengths */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            >
+              {[
+                { icon: Rocket, label: "Innovation", color: "blue" },
+                { icon: Users, label: "Leadership", color: "purple" },
+                { icon: Zap, label: "Fast Learner", color: "yellow" },
+                { icon: Target, label: "Goal-Oriented", color: "green" }
+              ].map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={idx}
+                    whileHover={{ scale: 1.05 }}
+                    className={`p-6 rounded-2xl bg-gradient-to-br from-${item.color}-50 to-${item.color}-100 dark:from-${item.color}-900/20 dark:to-${item.color}-800/20 border border-${item.color}-200 dark:border-${item.color}-800 text-center`}
+                  >
+                    <Icon className={`mx-auto mb-2 text-${item.color}-600 dark:text-${item.color}-400`} size={32} />
+                    <p className="font-bold text-gray-900 dark:text-white">{item.label}</p>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
           </div>
         </section>
 
@@ -450,47 +547,50 @@ const Portfolio = () => {
             </motion.div>
 
             <div className="space-y-8">
-              {experiences.map((exp, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="group relative"
-                >
-                  <div className="p-8 rounded-3xl bg-white dark:bg-gray-900 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800">
-                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                      <div className="flex-1">
-                        <div className="flex items-start gap-3 mb-2">
-                          <div className={`p-2 rounded-xl bg-gradient-to-br from-${exp.color}-500 to-${exp.color}-600 text-white mt-1`}>
-                            <Briefcase size={20} />
-                          </div>
-                          <div>
-                            <h3 className="text-xl font-bold mb-1">{exp.title}</h3>
-                            <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">{exp.company}</p>
+              {experiences.map((exp, idx) => {
+                const Icon = exp.icon;
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    className="group relative"
+                  >
+                    <div className="p-8 rounded-3xl bg-white dark:bg-gray-900 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800 hover:border-blue-200 dark:hover:border-blue-800">
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                        <div className="flex-1">
+                          <div className="flex items-start gap-3 mb-2">
+                            <div className={`p-2 rounded-xl bg-gradient-to-br from-${exp.color}-500 to-${exp.color}-600 text-white mt-1 group-hover:scale-110 transition-transform`}>
+                              <Icon size={20} />
+                            </div>
+                            <div>
+                              <h3 className="text-xl font-bold mb-1">{exp.title}</h3>
+                              <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">{exp.company}</p>
+                            </div>
                           </div>
                         </div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400 md:text-right">
+                          <p className="font-medium">{exp.period}</p>
+                          <p className="flex items-center gap-1 md:justify-end">
+                            <MapPin size={14} />
+                            {exp.location}
+                          </p>
+                        </div>
                       </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400 md:text-right">
-                        <p className="font-medium">{exp.period}</p>
-                        <p className="flex items-center gap-1 md:justify-end">
-                          <MapPin size={14} />
-                          {exp.location}
-                        </p>
-                      </div>
+                      <ul className="space-y-2">
+                        {exp.highlights.map((highlight, i) => (
+                          <li key={i} className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                            <span className="text-blue-600 dark:text-blue-400 font-bold mt-1">▹</span>
+                            <span className="leading-relaxed">{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="space-y-2">
-                      {exp.highlights.map((highlight, i) => (
-                        <li key={i} className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
-                          <span className="text-blue-600 dark:text-blue-400 font-bold mt-1">▹</span>
-                          <span className="leading-relaxed">{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -534,14 +634,41 @@ const Portfolio = () => {
                     </div>
 
                     <h3 className="text-xl font-bold mb-1">{project.title}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{project.subtitle}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{project.subtitle}</p>
+
+                    {project.role && (
+                      <div className="mb-3">
+                        <span className="inline-block px-3 py-1 rounded-lg text-xs font-bold bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+                          {project.role}
+                        </span>
+                      </div>
+                    )}
 
                     <p className="text-gray-700 dark:text-gray-300 text-sm mb-4 leading-relaxed">
                       {project.description}
                     </p>
+
+                    {project.impact && (
+                      <div className="mb-3 p-2 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+                        <p className="text-xs font-semibold text-green-700 dark:text-green-400 flex items-center gap-1">
+                          <TrendingUp size={14} />
+                          {project.impact}
+                        </p>
+                      </div>
+                    )}
+
                     <p className="text-xs text-gray-500 dark:text-gray-500 font-mono leading-relaxed">
                       {project.tech}
                     </p>
+
+                    {project.institution && (
+                      <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                        <p className="text-xs text-gray-600 dark:text-gray-400">
+                          <span className="font-semibold">{project.institution}</span>
+                          {project.period && <span> • {project.period}</span>}
+                        </p>
+                      </div>
+                    )}
                   </motion.div>
                 );
               })}
@@ -653,26 +780,31 @@ const Portfolio = () => {
                 <h3 className="text-2xl font-bold">Certifications & Training</h3>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
-                {certifications.map((cert, i) => (
-                  <div key={i} className="flex items-start gap-3 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border border-gray-100 dark:border-gray-800">
-                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 mt-2 flex-shrink-0"></div>
-                    <div className="flex-1">
-                      <p className="font-semibold text-gray-900 dark:text-white mb-1">{cert.name}</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{cert.org}</p>
-                      {cert.link && (
-                        <a
-                          href={cert.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
-                        >
-                          View Certificate
-                          <ExternalLink size={14} />
-                        </a>
-                      )}
+                {certifications.map((cert, i) => {
+                  const Icon = cert.icon;
+                  return (
+                    <div key={i} className="flex items-start gap-3 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border border-gray-100 dark:border-gray-800">
+                      <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/30 mt-1">
+                        <Icon size={18} className="text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-semibold text-gray-900 dark:text-white mb-1">{cert.name}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{cert.issuer}</p>
+                        {cert.link && (
+                          <a
+                            href={cert.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
+                          >
+                            View Certificate
+                            <ExternalLink size={14} />
+                          </a>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </motion.div>
 
@@ -686,14 +818,14 @@ const Portfolio = () => {
             >
               <h3 className="text-2xl font-bold mb-6">Languages</h3>
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/10 backdrop-blur-sm">
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all">
                   <span className="text-4xl">🇫🇷</span>
                   <div>
                     <p className="font-bold text-lg">French</p>
                     <p className="text-sm opacity-90">Professional Proficiency (C1)</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/10 backdrop-blur-sm">
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all">
                   <span className="text-4xl">🇬🇧</span>
                   <div>
                     <p className="font-bold text-lg">English</p>
@@ -706,14 +838,22 @@ const Portfolio = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 px-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10">
-          <div className="max-w-4xl mx-auto text-center">
+        <section className="py-24 px-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 relative overflow-hidden">
+          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+          <div className="max-w-4xl mx-auto text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.5 }}
             >
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="inline-block mb-6"
+              >
+                <Rocket size={48} className="text-blue-600 dark:text-blue-400" />
+              </motion.div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Let's Build Something Amazing
@@ -731,16 +871,12 @@ const Portfolio = () => {
                   <span>Start a Conversation</span>
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </a>
-                <a
-                  href="#projects"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('projects');
-                  }}
+                <button
+                  onClick={() => scrollToSection('projects')}
                   className="flex items-center gap-2 px-8 py-4 rounded-xl bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 font-semibold transition-all hover:scale-105 shadow-lg"
                 >
                   View My Work
-                </a>
+                </button>
               </div>
             </motion.div>
           </div>
