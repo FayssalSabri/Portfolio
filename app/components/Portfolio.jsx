@@ -176,7 +176,7 @@ const Portfolio = () => {
       color: "purple"
     },
     "Data Engineering": {
-      items: ["Pandas", "SQL", "PostgreSQL", "Apache Spark", "PySpark", "Hadoop", "ETL"],
+      items: ["Pandas", "SQL", "PostgreSQL","Supabase",,, "Apache Spark", "PySpark", "Hadoop", "ETL"],
       icon: Database,
       color: "emerald"
     },
