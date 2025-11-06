@@ -1,34 +1,66 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Moon, Sun, Github, Linkedin, Mail, MapPin, Briefcase, GraduationCap, Award, Code, Database, Brain, Cloud, ChevronDown, ExternalLink, Menu, X, ArrowRight, Sparkles, Target, Users, TrendingUp, Zap, Shield, Activity, BookOpen, Lightbulb, Rocket } from 'lucide-react';
+
+// ----------------------------------------------------------------
+// UTILITY FUNCTION: THROTTLE
+// Limite la fréquence d'exécution d'une fonction.
+// ----------------------------------------------------------------
+const throttle = (func, limit) => {
+  let inThrottle;
+  return function() {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      // Exécutera la fonction après 'limit' millisecondes
+      setTimeout(() => inThrottle = false, limit);
+    }
+  }
+}
 
 const Portfolio = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  // activeSection pour la navigation, le throttle va la rendre plus fluide
+  const [activeSection, setActiveSection] = useState('hero'); 
+
+  // Utilisation de useCallback pour stabiliser la fonction de scroll
+  const handleScroll = useCallback(() => {
+    // 1. Mise à jour de scrollY pour la navbar (moins coûteux que la détection de section)
+    setScrollY(window.scrollY);
+    
+    // 2. Calcul de la section active (l'opération coûteuse)
+    const sections = ['hero', 'about', 'experience', 'projects', 'skills'];
+    const current = sections.find(section => {
+      const element = document.getElementById(section);
+      if (element) {
+        // getBoundingClientRect est coûteux, mais est maintenant limité par le throttle.
+        const rect = element.getBoundingClientRect();
+        // Détection de section : si le haut de la section est au-dessus de 100px et son bas au-dessous de 100px (i.e., visible en haut du viewport)
+        return rect.top <= 100 && rect.bottom >= 100;
+      }
+      return false;
+    });
+    if (current) setActiveSection(current);
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-      
-      const sections = ['hero', 'about', 'experience', 'projects', 'skills'];
-      const current = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      if (current) setActiveSection(current);
-    };
+    // 3. Application du throttle (limitation à une exécution toutes les 100ms)
+    const throttledScroll = throttle(handleScroll, 100); 
     
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', throttledScroll);
+    
+    // Nettoyage de l'écouteur d'événement
+    return () => window.removeEventListener('scroll', throttledScroll);
+  }, [handleScroll]); // handleScroll est stable grâce à useCallback
+
+
+  // --- Données du Portfolio (inchangées) ---
 
   const experiences = [
     {
@@ -342,10 +374,10 @@ const Portfolio = () => {
               className="mb-6"
             >
               <h2 className="text-2xl md:text-4xl font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                Data Scientist Engineer
+                AI & Data Scientist Engineer
               </h2>
               <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Transforming data into actionable insights • Machine Learning & Cloud Expert
+                Transforming data into actionable insights • Machine Learning & Cloud
               </p>
             </motion.div>
 
@@ -408,7 +440,7 @@ const Portfolio = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Target size={16} className="text-green-600 dark:text-green-400" />
-                Open to Remote & Hybrid
+                Open to work
               </div>
             </motion.div>
 
@@ -457,7 +489,7 @@ const Portfolio = () => {
                 </div>
                 <div className="space-y-6">
                   <div className="pl-4 border-l-2 border-blue-500">
-                    <h4 className="font-bold text-lg mb-1">M.Sc. Data & AI in Industrial Engineering</h4>
+                    <h4 className="font-bold text-lg mb-1">M.Eng. Data & AI in Industrial Engineering</h4>
                     <p className="text-gray-700 dark:text-gray-300 font-medium">École Centrale de Lyon</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">2024-2025 • Lyon, France</p>
                   </div>
@@ -489,7 +521,7 @@ const Portfolio = () => {
                   <h3 className="text-2xl font-bold">Expertise</h3>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                  Specialized in the <span className="font-semibold text-gray-900 dark:text-white">complete data science lifecycle</span>—from business scoping and data exploration to model development and cloud-based deployment.
+                  Specialized in the <span className="font-semibold text-gray-900 dark:text-white">complete data science lifecycle</span> - from business scoping and data exploration to model development and cloud-based deployment.
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   Proficient in <span className="font-semibold text-gray-900 dark:text-white">Python, SQL, and Spark</span>, I excel at translating complex business challenges into scalable AI solutions within collaborative, agile environments.
@@ -892,7 +924,7 @@ const Portfolio = () => {
                     Fayssal Sabri
                   </span>
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400">Data Scientist Engineer</p>
+                <p className="text-gray-600 dark:text-gray-400">AI & Data Scientist Engineer</p>
               </div>
               <div className="flex gap-4">
                 <a
@@ -924,7 +956,7 @@ const Portfolio = () => {
             </div>
             <div className="text-center pt-6 border-t border-gray-200 dark:border-gray-800">
               <p className="text-gray-600 dark:text-gray-400 text-sm">
-                © 2025 Fayssal Sabri. Crafted with passion for innovation and excellence.
+                © 2025 Fayssal Sabri
               </p>
             </div>
           </div>
