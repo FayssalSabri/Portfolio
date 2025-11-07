@@ -1,5 +1,7 @@
 'use client';
 
+
+import Logo from './Logo';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Moon, Sun, Github, Linkedin, Mail, MapPin, Briefcase, GraduationCap, Award, Code, Database, Brain, Cloud, ChevronDown, ExternalLink, Menu, X, ArrowRight, Sparkles, Target, Users, TrendingUp, Zap, Shield, Activity, BookOpen, Lightbulb, Rocket, Cpu, Palette, Server, Terminal,ClipboardCheck, 
@@ -521,11 +523,13 @@ const Portfolio = () => {
                 className="text-2xl font-bold cursor-pointer group"
                 onClick={() => scrollToSection('hero')}
               >
-                <div className="relative">
+                <Logo size="medium" />
+                
+                {/* <div className="relative">
                   <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                     FS
                   </span>
-                </div>
+                </div> */}
               </motion.div>
 
               <div className="hidden md:flex items-center gap-1">
