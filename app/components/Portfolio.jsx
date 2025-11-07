@@ -617,7 +617,7 @@ const Portfolio = () => {
                 />
               </h2>
               <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Transforming data into intelligent solutions • Machine Learning & Cloud
+                Data • ML • Cloud • Innovation
               </p>
             </motion.div>
 
