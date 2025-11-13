@@ -319,9 +319,10 @@ const Portfolio = () => {
       period: "Jul. 2023 – Sep. 2023",
       location: "Tangier, Morocco",
       highlights: [
-        "Implemented YOLOv5 model reducing diagnostic time by 20%",
-        "Industrialized PoC for production team integration",
-        "Applied Python, OpenCV, YOLOv5, and TensorFlow"
+        "Built and deployed a YOLOv5 system for automated water-leak detection on vehicle windshields, improving detection reliability.",
+        "Reduced diagnostic time by 20% through real-time defect identification and optimization of the inspection workflow.",
+        "Industrialized the proof of concept and coordinated integration with production teams for operational use.",
+        "Utilized Python, OpenCV, YOLOv5, TensorFlow, and industrial image-processing techniques"
       ],
       color: "indigo",
       icon: Activity,
