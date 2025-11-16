@@ -389,27 +389,26 @@ const HeroSection = ({ onSectionClick }) => {
     <section id="home" className="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden">
       {/* Subtle Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-20 w-72 h-72 bg-blue-500/10 dark:bg-blue-400/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-500/10 dark:bg-purple-400/5 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-blue-500/5 to-purple-500/5 dark:from-blue-400/3 dark:to-purple-400/3 rounded-full blur-3xl animate-spin-slow" />
+        <div className="absolute top-1/4 -left-20 w-72 h-72 bg-gray-200/30 dark:bg-gray-700/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-gray-200/30 dark:bg-gray-700/20 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gray-200/20 dark:bg-gray-700/15 rounded-full blur-3xl animate-spin-slow" />
       </div>
 
       <div className="max-w-5xl mx-auto text-center relative z-10">
-        {/* Status Badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200/50 dark:border-blue-800/50 text-blue-600 dark:text-blue-400 text-sm font-medium mb-8 backdrop-blur-sm"
-        >
-          <motion.div 
-            className="w-2 h-2 bg-blue-600 rounded-full"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-          Available for new opportunities
-        </motion.div>
-
+      {/* Status Badge */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400 text-sm font-medium mb-8 backdrop-blur-sm"
+      >
+        <motion.div 
+          className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+        Available for new opportunities
+      </motion.div>
         {/* Main Heading - Clean & Bold */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -417,7 +416,7 @@ const HeroSection = ({ onSectionClick }) => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-10 leading-tight"
         >
-          <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
+          <span className="block text-gray-900 dark:text-white">
             Fayssal Sabri
           </span>
         </motion.h1>
@@ -431,13 +430,13 @@ const HeroSection = ({ onSectionClick }) => {
         >
           <div className="flex flex-col items-center justify-center gap-4 mb-6 min-h-[80px]">
             <div className="relative flex items-center justify-center w-full">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-800 to-indigo-900 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent whitespace-nowrap">
+              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 dark:text-blue-400 whitespace-nowrap">
                 {displayedText}
               </span>
               <motion.span
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-                className="inline-block w-1 h-8 sm:h-10 md:h-12 bg-blue-800 dark:bg-blue-300 ml-1"
+                className="inline-block w-1 h-8 sm:h-10 md:h-12 bg-blue-600 dark:bg-blue-400 ml-1"
               />
             </div>
           </div>
@@ -469,11 +468,11 @@ const HeroSection = ({ onSectionClick }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + idx * 0.1 }}
               whileHover={{ y: -5, scale: 1.03 }}
-              className="group relative p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:border-blue-500/50 dark:hover:border-blue-400/50 transition-all hover:shadow-xl"
+              className="group relative p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-xl"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 dark:from-blue-400/5 dark:to-purple-400/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gray-100/30 dark:bg-gray-700/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative z-10">
-                <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-2">
+                <div className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
                   {stat.number}
                 </div>
                 <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 font-medium">
@@ -505,14 +504,6 @@ const HeroSection = ({ onSectionClick }) => {
 
       {/* Custom CSS for animations */}
       <style jsx>{`
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient {
-          animation: gradient 3s ease infinite;
-        }
         @keyframes spin-slow {
           from { transform: translate(-50%, -50%) rotate(0deg); }
           to { transform: translate(-50%, -50%) rotate(360deg); }
@@ -531,7 +522,6 @@ const HeroSection = ({ onSectionClick }) => {
     </section>
   );
 };
-
 
 // About Section with clean layout
 const AboutSection = () => {
@@ -851,7 +841,7 @@ const SkillsSection = () => {
       category: "Cloud & DevOps",
       icon: Cloud,
       skills: ["AWS", "GCP", "Azure", "Kubernetes", "CI/CD", "MLflow", "FastAPI"],
-      color: "orange"
+      color: "red"
     }
   ];
 
