@@ -1113,7 +1113,7 @@ const CertificationsSection = () => {
       title: "Advanced SQL",
       issuer: "365 Data Science",
       date: "2023",
-      image: "/images/certifications/ASQL-BsghoSsW.png", 
+      image: "/images/certifications/advancedSQL.jpg", 
       link: "https://learn.365datascience.com/certificates/CC-FF10CFFD9D/",
       skills: ["SQL", "Database", "Data Analysis"]
     },
@@ -1445,7 +1445,7 @@ const ContactSection = () => {
                 {
                   icon: Mail,
                   label: 'Email',
-                  value: '@Fayssal',
+                  value: 'fayssal.sabri.pro@gmail.com',
                   href: 'mailto:fayssal.sabri.pro@gmail.com'
                 },
                 {
