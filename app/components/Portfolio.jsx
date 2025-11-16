@@ -4,13 +4,12 @@ import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Brain, Code, Database, Cloud, Rocket, Users, Mail, MapPin, 
-  Calendar, ArrowUpRight, ExternalLink, ChevronRight,
+  Calendar, ArrowUpRight, ExternalLink, ChevronRight, ChevronLeft,
   Github, Linkedin, Twitter, FileText, Award, School,
   Briefcase, Cpu, Zap, Sparkles, ArrowRight, Phone,
-  BookOpen, Languages, Download, X
+  BookOpen, Languages, Download, X, Image
 } from 'lucide-react';
 import Logo from '../components/Logo';
-import { ThreeDImageRing } from '../components/ThreeDImageRing';
 
 // ----------------------------------------------------------------
 // OPTIMIZED UTILITIES
@@ -29,6 +28,135 @@ const throttle = (func, limit) => {
 // ----------------------------------------------------------------
 // LAZY LOADED COMPONENTS
 // ----------------------------------------------------------------
+
+// Certification Carousel Component
+const CertificationCarousel = ({ certifications }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [loadedImages, setLoadedImages] = useState({});
+
+  const handleNext = () => {
+    setDirection(1);
+    setCurrentIndex((prevIndex) => 
+      prevIndex === certifications.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? certifications.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleImageLoad = (index) => {
+    setLoadedImages(prev => ({ ...prev, [index]: true }));
+  };
+
+  const variants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+      scale: 0.8
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1
+    },
+    exit: (direction) => ({
+      x: direction < 0 ? 300 : -300,
+      opacity: 0,
+      scale: 0.8
+    })
+  };
+
+  return (
+    <div className="relative w-full max-w-2xl mx-auto h-80">
+      {/* Carousel Container */}
+      <div className="relative w-full h-full rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10">
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div
+            key={currentIndex}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+              scale: { duration: 0.2 }
+            }}
+            className="absolute inset-0 w-full h-full"
+          >
+            {/* Certification Image */}
+            <div className="w-full h-full flex items-center justify-center p-8">
+              <div className="relative w-full h-full max-w-sm">
+                {!loadedImages[currentIndex] && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-xl">
+                    <div className="text-center">
+                      <Image size={48} className="text-gray-400 mx-auto mb-3" />
+                      <p className="text-gray-500 text-sm">Loading certification...</p>
+                    </div>
+                  </div>
+                )}
+                <img
+                  src={certifications[currentIndex].image}
+                  alt={certifications[currentIndex].title}
+                  className={`w-full h-full object-contain rounded-xl shadow-lg transition-opacity duration-300 ${
+                    loadedImages[currentIndex] ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoad={() => handleImageLoad(currentIndex)}
+                />
+              </div>
+            </div>
+
+            {/* Certification Info Overlay */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
+              <h3 className="font-bold text-lg mb-1">{certifications[currentIndex].title}</h3>
+              <p className="text-blue-300 text-sm">{certifications[currentIndex].issuer}</p>
+              <p className="text-gray-300 text-xs">{certifications[currentIndex].date}</p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Navigation Buttons */}
+      <button
+        onClick={handlePrev}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-700 transition-all z-10"
+      >
+        <ChevronLeft size={20} />
+      </button>
+      
+      <button
+        onClick={handleNext}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-700 transition-all z-10"
+      >
+        <ChevronRight size={20} />
+      </button>
+
+      {/* Dots Indicator */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+        {certifications.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              setDirection(index > currentIndex ? 1 : -1);
+              setCurrentIndex(index);
+            }}
+            className={`w-2 h-2 rounded-full transition-all ${
+              index === currentIndex 
+                ? 'bg-white scale-125' 
+                : 'bg-white/50 hover:bg-white/80'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -114,9 +242,9 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, onThemeToggle }) 
             className="flex items-center gap-2 cursor-pointer"
             onClick={() => onSectionClick('home')}
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <Logo size='medium' />
-            </div>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+            <Logo showSignature={true} size="medium" />
+          </div>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -179,101 +307,186 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, onThemeToggle }) 
   );
 };
 
-// Hero Section with clean design
+// Hero Section with clean TypeScript effect
 const HeroSection = ({ onSectionClick }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  const roles = [
+    'AI & Data Science',
+    'Machine Learning & Deep Learning',
+    'Computer Vision',
+    'NLP & LLMs',
+    'MLOps & Deployment'
+  ];
+
+  useEffect(() => {
+    const role = roles[currentRoleIndex];
+    const typingSpeed = isDeleting ? 50 : 100;
+    const pauseDuration = 2000;
+
+    const timer = setTimeout(() => {
+      if (!isDeleting && displayedText === role) {
+        setTimeout(() => setIsDeleting(true), pauseDuration);
+      } else if (isDeleting && displayedText === '') {
+        setIsDeleting(false);
+        setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+      } else {
+        setDisplayedText(
+          isDeleting
+            ? role.substring(0, displayedText.length - 1)
+            : role.substring(0, displayedText.length + 1)
+        );
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [displayedText, currentRoleIndex, isDeleting]);
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20">
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Avatar/Badge */}
+    <section id="home" className="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden">
+      {/* Subtle Animated Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-20 w-72 h-72 bg-blue-500/10 dark:bg-blue-400/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-500/10 dark:bg-purple-400/5 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-blue-500/5 to-purple-500/5 dark:from-blue-400/3 dark:to-purple-400/3 rounded-full blur-3xl animate-spin-slow" />
+      </div>
+
+      <div className="max-w-5xl mx-auto text-center relative z-10">
+        {/* Status Badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400 text-sm font-medium mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200/50 dark:border-blue-800/50 text-blue-600 dark:text-blue-400 text-sm font-medium mb-8 backdrop-blur-sm"
         >
-          <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
+          <motion.div 
+            className="w-2 h-2 bg-blue-600 rounded-full"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
           Available for new opportunities
         </motion.div>
 
-        {/* Main Heading */}
+        {/* Main Heading - Clean & Bold */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-10 leading-tight"
         >
-          <span className="bg-gradient-to-r from-gray-900 via-blue-600 to-purple-600 dark:from-white dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+          <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
             Fayssal Sabri
           </span>
         </motion.h1>
 
-        {/* Subheading */}
+        {/* TypeScript Effect - Specialty */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-8"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-12"
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl text-gray-600 dark:text-gray-400 font-medium mb-4">
-            AI & Data Science Engineer
-          </h2>
-          <p className="text-lg text-gray-500 dark:text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            Building intelligent systems that solve real-world challenges through machine learning, 
-            data engineering, and scalable AI solutions.
+          <div className="flex flex-col items-center justify-center gap-4 mb-6 min-h-[80px]">
+            <div className="relative flex items-center justify-center w-full">
+              <span className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-800 to-indigo-900 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent whitespace-nowrap">
+                {displayedText}
+              </span>
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+                className="inline-block w-1 h-8 sm:h-10 md:h-12 bg-blue-800 dark:bg-blue-300 ml-1"
+              />
+            </div>
+          </div>
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Building intelligent systems that solve real-world challenges through 
+            <span className="font-semibold text-gray-900 dark:text-white"> machine learning</span>, 
+            <span className="font-semibold text-gray-900 dark:text-white"> data engineering</span>, and 
+            <span className="font-semibold text-gray-900 dark:text-white"> scalable AI solutions</span>
           </p>
         </motion.div>
 
-        {/* CTA Buttons */}
+        {/* Stats Cards - Minimal & Elegant */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row justify-center gap-4 mb-12"
-        >
-          <motion.button
-            onClick={() => onSectionClick('projects')}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all shadow-lg hover:shadow-xl"
-          >
-            View my work
-            <ArrowRight size={20} />
-          </motion.button>
-          
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center gap-2 px-8 py-4 border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-xl font-semibold transition-all"
-          >
-            <Mail size={20} />
-            Contact me
-          </motion.a>
-        </motion.div>
-
-        {/* Quick Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="grid grid-cols-3 gap-8 max-w-2xl mx-auto"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 max-w-5xl mx-auto mb-24"
         >
           {[
             { number: '10+', label: 'Projects' },
-            { number: '3', label: 'Years Experience' },
+            { number: '6', label: 'Certifications' },
+            { number: '2', label: 'Dual Degrees' },
+            { number: '3', label: 'Hackathons' },
             { number: '15+', label: 'Technologies' }
           ].map((stat, idx) => (
-            <div key={idx} className="text-center">
-              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                {stat.number}
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 + idx * 0.1 }}
+              whileHover={{ y: -5, scale: 1.03 }}
+              className="group relative p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:border-blue-500/50 dark:hover:border-blue-400/50 transition-all hover:shadow-xl"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 dark:from-blue-400/5 dark:to-purple-400/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 font-medium">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-sm text-gray-500 dark:text-gray-500">
-                {stat.label}
-              </div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="flex flex-col items-center gap-2 text-gray-400 dark:text-gray-600 cursor-pointer"
+            onClick={() => onSectionClick('about')}
+          >
+            <span className="text-xs font-medium">Scroll to explore</span>
+            <ChevronRight size={20} className="rotate-90" />
+          </motion.div>
+        </motion.div>
       </div>
+
+      {/* Custom CSS for animations */}
+      <style jsx>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+          animation: gradient 3s ease infinite;
+        }
+        @keyframes spin-slow {
+          from { transform: translate(-50%, -50%) rotate(0deg); }
+          to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+      `}</style>
     </section>
   );
 };
@@ -839,7 +1052,7 @@ const ProjectsSection = () => {
   );
 };
 
-// Enhanced Certifications Section with 3D Ring
+// Enhanced Certifications Section with Carousel
 const CertificationsSection = () => {
   const certifications = [
     {
@@ -895,12 +1108,6 @@ const CertificationsSection = () => {
   const [selectedCert, setSelectedCert] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Prepare images for 3D ring
-  const certificationImages = useMemo(() => 
-    certifications.map(cert => cert.image), 
-    [certifications]
-  );
-
   const openModal = (cert) => {
     setSelectedCert(cert);
     setIsModalOpen(true);
@@ -931,45 +1138,14 @@ const CertificationsSection = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* 3D Image Ring Section */}
+          {/* Carousel Section */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             className="flex justify-center lg:justify-end"
           >
-            <div className="w-full max-w-md lg:max-w-lg h-80 lg:h-96 relative">
-              <ThreeDImageRing
-                images={certificationImages}
-                width={400}
-                perspective={2000}
-                imageDistance={600}
-                initialRotation={180}
-                animationDuration={1.2}
-                staggerDelay={0.08}
-                hoverOpacity={0.7}
-                draggable={true}
-                mobileBreakpoint={768}
-                mobileScaleFactor={0.7}
-                containerClassName="cursor-grab active:cursor-grabbing"
-                ringClassName="rounded-2xl"
-                imageClassName="rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300"
-              />
-              
-              {/* Interactive Hint */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2 }}
-                className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center"
-              >
-                <p className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
-                  <span className="hidden sm:inline">Drag to rotate</span>
-                  <span className="sm:hidden">Swipe to rotate</span>
-                  <ChevronRight size={12} className="animate-bounce" />
-                </p>
-              </motion.div>
-            </div>
+            <CertificationCarousel certifications={certifications} />
           </motion.div>
 
           {/* Certifications List */}
@@ -984,7 +1160,7 @@ const CertificationsSection = () => {
                 Professional Certifications
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Explore my certifications by rotating the 3D carousel or browse the list below
+                Browse through my certifications using the carousel or explore the detailed list below
               </p>
             </div>
 
@@ -1088,7 +1264,7 @@ const CertificationsSection = () => {
                   />
                   <button
                     onClick={closeModal}
-                    className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition-all"
+                    className="absolute top-4 right-4 p-2 bg-gray-900/80 hover:bg-gray-900 rounded-full backdrop-blur-sm transition-all shadow-lg"
                   >
                     <X size={20} className="text-white" />
                   </button>
@@ -1231,7 +1407,7 @@ const ContactSection = () => {
                 {
                   icon: Mail,
                   label: 'Email',
-                  value: 'fayssal.sabri.pro@gmail.com',
+                  value: '@Fayssal',
                   href: 'mailto:fayssal.sabri.pro@gmail.com'
                 },
                 {
