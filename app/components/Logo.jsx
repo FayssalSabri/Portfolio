@@ -445,34 +445,6 @@ const Logo = ({
           transition={{ duration: 0.5 }}
         />
       </motion.div>
-
-      {/* Signature avec meilleur contraste */}
-      {showSignature && !faviconMode && (
-        <motion.div className={`${config.signature} relative`}>
-          <motion.span
-            className={`${config.text} font-semibold text-slate-800 dark:text-slate-200 block leading-tight`}
-            animate={{ opacity: isHovered ? 1 : 0.9 }}
-          >
-            Fayssal Sabri
-          </motion.span>
-          <motion.div
-            className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 flex items-center gap-2"
-            animate={{ opacity: isHovered ? 1 : 0.8 }}
-          >
-            <span>AI & Data Science Engineer</span>
-            <motion.div
-              animate={{ 
-                scale: [1, 1.3, 1],
-              }}
-              transition={{ 
-                duration: 1.5, 
-                repeat: Infinity 
-              }}
-              className="w-2 h-2 bg-blue-500 rounded-full"
-            />
-          </motion.div>
-        </motion.div>
-      )}
     </motion.div>
   );
 };

@@ -6,7 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Fayssal Sabri - Data Scientist & ML Engineer',
+  title: 'Fayssal Sabri',
   description:
     'Portfolio of Fayssal Sabri - Data Scientist specializing in Machine Learning, Cloud, and AI',
 }
