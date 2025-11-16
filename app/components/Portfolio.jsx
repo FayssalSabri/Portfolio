@@ -30,10 +30,12 @@ const throttle = (func, limit) => {
 // ----------------------------------------------------------------
 
 // Certification Carousel Component
+// Certification Carousel Component
 const CertificationCarousel = ({ certifications }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [loadedImages, setLoadedImages] = useState({});
+  const [imageErrors, setImageErrors] = useState({});
 
   const handleNext = () => {
     setDirection(1);
@@ -52,6 +54,32 @@ const CertificationCarousel = ({ certifications }) => {
   const handleImageLoad = (index) => {
     setLoadedImages(prev => ({ ...prev, [index]: true }));
   };
+
+  const handleImageError = (index) => {
+    setImageErrors(prev => ({ ...prev, [index]: true }));
+    setLoadedImages(prev => ({ ...prev, [index]: true }));
+  };
+
+  // Timeout fallback - force display after 3 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!loadedImages[currentIndex]) {
+        setLoadedImages(prev => ({ ...prev, [currentIndex]: true }));
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [currentIndex, loadedImages]);
+
+  // Preload images on mount
+  useEffect(() => {
+    certifications.forEach((cert, index) => {
+      const img = new window.Image();
+      img.onload = () => handleImageLoad(index);
+      img.onerror = () => handleImageError(index);
+      img.src = cert.image;
+    });
+  }, []);
 
   const variants = {
     enter: (direction) => ({
@@ -93,22 +121,32 @@ const CertificationCarousel = ({ certifications }) => {
             {/* Certification Image */}
             <div className="w-full h-full flex items-center justify-center p-8">
               <div className="relative w-full h-full max-w-sm">
-                {!loadedImages[currentIndex] && (
+                {!loadedImages[currentIndex] && !imageErrors[currentIndex] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-xl">
                     <div className="text-center">
-                      <Image size={48} className="text-gray-400 mx-auto mb-3" />
+                      <Image size={48} className="text-gray-400 mx-auto mb-3 animate-pulse" />
                       <p className="text-gray-500 text-sm">Loading certification...</p>
                     </div>
                   </div>
                 )}
-                <img
-                  src={certifications[currentIndex].image}
-                  alt={certifications[currentIndex].title}
-                  className={`w-full h-full object-contain rounded-xl shadow-lg transition-opacity duration-300 ${
-                    loadedImages[currentIndex] ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  onLoad={() => handleImageLoad(currentIndex)}
-                />
+                {imageErrors[currentIndex] ? (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-xl">
+                    <div className="text-center">
+                      <Award size={48} className="text-gray-400 mx-auto mb-3" />
+                      <p className="text-gray-500 text-sm">Certificate image unavailable</p>
+                    </div>
+                  </div>
+                ) : (
+                  <img
+                    src={certifications[currentIndex].image}
+                    alt={certifications[currentIndex].title}
+                    className={`w-full h-full object-contain rounded-xl shadow-lg transition-opacity duration-300 ${
+                      loadedImages[currentIndex] ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    onLoad={() => handleImageLoad(currentIndex)}
+                    onError={() => handleImageError(currentIndex)}
+                  />
+                )}
               </div>
             </div>
 
@@ -157,7 +195,6 @@ const CertificationCarousel = ({ certifications }) => {
     </div>
   );
 };
-
 // Scroll to top component
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
