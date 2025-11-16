@@ -491,6 +491,7 @@ const HeroSection = ({ onSectionClick }) => {
   );
 };
 
+
 // About Section with clean layout
 const AboutSection = () => {
   return (
