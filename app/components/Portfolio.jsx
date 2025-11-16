@@ -1059,7 +1059,7 @@ const CertificationsSection = () => {
       title: "Machine Learning Specialization",
       issuer: "Stanford University (Coursera)",
       date: "2024",
-      image: "/images/certifications/Mlspecialisation.png", 
+      image: "/images/certifications/Mlspecialisation.jpg", 
       link: "https://www.coursera.org/account/accomplishments/specialization/VF663RCLC57N",
       skills: ["Machine Learning", "Deep Learning", "AI Fundamentals"]
     },
@@ -1075,7 +1075,7 @@ const CertificationsSection = () => {
       title: "Advanced SQL",
       issuer: "365 Data Science",
       date: "2023",
-      image: "/images/certifications/advancedSQL.png", 
+      image: "/images/certifications/advancedSQL.jpg", 
       link: "https://learn.365datascience.com/certificates/CC-FF10CFFD9D/",
       skills: ["SQL", "Database", "Data Analysis"]
     },
@@ -1099,7 +1099,7 @@ const CertificationsSection = () => {
       title: "Agile and Kanban",
       issuer: "Udemy",
       date: "2024",
-      image: "/images/certifications/Agile.png", 
+      image: "/images/certifications/Agile.jpg", 
       link: "https://www.udemy.com/certificate/UC-9cd64e94-cdd1-43b3-a548-d1cf5ed2f1d6/",
       skills: ["Agile Methodologies", "Kanban", "Project Management"]
     }
