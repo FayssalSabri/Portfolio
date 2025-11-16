@@ -231,7 +231,7 @@ const ScrollToTop = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <ArrowUpRight size={20} className="rotate-45" />
+          <ArrowUpRight size={20} className="-rotate-45" />
         </motion.button>
       )}
     </AnimatePresence>
