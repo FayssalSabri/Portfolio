@@ -453,12 +453,11 @@ const HeroSection = ({ onSectionClick }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 max-w-5xl mx-auto mb-24"
+          className="flex flex-wrap justify-center gap-4 sm:gap-6 max-w-5xl mx-auto mb-24"
         >
           {[
             { number: '10+', label: 'Projects' },
             { number: '6', label: 'Certifications' },
-            { number: '2', label: 'Dual Degrees' },
             { number: '3', label: 'Hackathons' },
             { number: '15+', label: 'Technologies' }
           ].map((stat, idx) => (
@@ -468,10 +467,10 @@ const HeroSection = ({ onSectionClick }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + idx * 0.1 }}
               whileHover={{ y: -5, scale: 1.03 }}
-              className="group relative p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-xl"
+              className="group relative p-6 rounded-2xl bg-white/50 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-300 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-700 transition-all hover:shadow-xl w-40 sm:w-44"
             >
-              <div className="absolute inset-0 bg-gray-100/30 dark:bg-gray-700/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="relative z-10">
+              <div className="absolute inset-0 bg-gray-100/30 dark:bg-gray-800/30 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10 text-center">
                 <div className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
                   {stat.number}
                 </div>
@@ -646,8 +645,8 @@ const AboutSection = () => {
               <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Interests</h3>
               <div className="flex flex-wrap gap-3">
                 {[
-                  "AI Research", "Open Source", "Robotics", "Quantum Computing",
-                  "Startups", "Mentoring", "Hackathons", "Technical Writing"
+                  "AI & Data Science", "Technology Watch & Innovation",, "Hackathons", "Problem Solving & Logical Reasoning",
+                  "Continuous Learning", "Traveling"
                 ].map((interest, idx) => (
                   <motion.span
                     key={idx}
@@ -679,7 +678,8 @@ const ExperienceSection = () => {
       description: "Developing ML pipeline for IoT intrusion detection and multi-agent LLM solutions for enhanced model explainability (XAI).",
       achievements: ["18% precision improvement", "XAI implementation", "ML pipeline development"],
       tech: ["Python", "Scikit-Learn", "TensorFlow", "MLOps"],
-      type: "Internship"
+      type: "Internship",
+      logo: "/images/companies/Audensiel-removebg-preview.png" 
     },
     {
       role: "Developer - Industrial Chatbot (RAG)",
@@ -689,7 +689,8 @@ const ExperienceSection = () => {
       description: "Built RAG assistant to automate production queries and deployed prototype via REST API.",
       achievements: ["RAG implementation", "API deployment", "Process automation"],
       tech: ["Python", "LangChain", "LLaMA 3", "ChromaDB"],
-      type: "Internship"
+      type: "Internship",
+      logo: "/images/companies/3d-smart-factory.png" 
     },
     {
       role: "Computer Vision Engineer",
@@ -699,12 +700,13 @@ const ExperienceSection = () => {
       description: "Developed YOLOv5 system for automated water-leak detection on vehicle windshields.",
       achievements: ["20% time reduction", "YOLOv5 implementation", "Production integration"],
       tech: ["Python", "OpenCV", "YOLOv5", "TensorFlow"],
-      type: "Internship"
+      type: "Internship",
+      logo: "/images/companies/renault-removebg-preview.png" 
     }
   ];
 
   return (
-    <section id="experience" className="py-20 px-6">
+    <section id="experience" className="py-20 px-6 bg-gray-50/50 dark:bg-gray-900/50">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -724,97 +726,147 @@ const ExperienceSection = () => {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700 transform -translate-x-1/2" />
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-blue-500 transform md:-translate-x-1/2" />
           
-          <div className="space-y-12">
+          <div className="space-y-16">
             {experiences.map((exp, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: idx * 0.1 }}
+                transition={{ delay: idx * 0.2, duration: 0.5 }}
                 className={`relative flex flex-col md:flex-row gap-8 ${
                   idx % 2 === 0 ? 'md:flex-row-reverse' : ''
                 }`}
               >
-                {/* Timeline dot */}
-                <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-blue-600 rounded-full transform -translate-x-1/2 z-10" />
+                {/* Timeline dot with logo */}
+                <div className="absolute left-8 md:left-1/2 w-16 h-16 transform -translate-x-1/2 z-20">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.2 + 0.3, type: "spring", stiffness: 200 }}
+                    className="w-full h-full rounded-full bg-white dark:bg-gray-800 flex items-center justify-center shadow-xl border-4 border-white dark:border-black overflow-hidden"
+                  >
+                    <img 
+                      src={exp.logo} 
+                      alt={`${exp.company} logo`}
+                      className="w-10 h-10 object-contain"
+                      onError={(e) => {
+                        // Fallback si l'image ne charge pas
+                        e.target.style.display = 'none';
+                        e.target.parentElement.innerHTML = `<div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center"><span class="text-white font-bold text-lg">${exp.company.charAt(0)}</span></div>`;
+                      }}
+                    />
+                  </motion.div>
+                </div>
                 
                 {/* Content */}
-                <div className={`md:w-1/2 ${idx % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} ml-12 md:ml-0`}>
+                <div className={`md:w-1/2 ${idx % 2 === 0 ? 'md:pr-16' : 'md:pl-16'} ml-24 md:ml-0`}>
                   <motion.div
-                    whileHover={{ y: -5 }}
-                    className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl border border-gray-100 dark:border-gray-700 transition-all"
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="relative p-6 sm:p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl hover:shadow-2xl border border-gray-100 dark:border-gray-700 transition-all overflow-hidden group"
                   >
-                    {/* Header */}
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                          {exp.role}
-                        </h3>
-                        <p className="text-blue-600 dark:text-blue-400 font-semibold">
-                          {exp.company}
-                        </p>
-                      </div>
-                      <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-medium rounded-full">
-                        {exp.type}
-                      </span>
-                    </div>
-
-                    {/* Meta info */}
-                    <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-500 mb-4">
-                      <div className="flex items-center gap-1">
-                        <Calendar size={14} />
-                        {exp.period}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <MapPin size={14} />
-                        {exp.location}
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                      {exp.description}
-                    </p>
-
-                    {/* Achievements */}
-                    <div className="mb-4">
-                      <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                        Key Achievements:
-                      </h4>
-                      <ul className="space-y-1">
-                        {exp.achievements.map((achievement, i) => (
-                          <li key={i} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-                            {achievement}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-1">
-                      {exp.tech.map((tech, i) => (
-                        <span
-                          key={i}
-                          className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded-md"
-                        >
-                          {tech}
+                    {/* Decorative gradient overlay */}
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    
+                    <div className="relative z-10">
+                      {/* Header */}
+                      <div className="flex items-start justify-between mb-4 flex-wrap gap-2">
+                        <div className="flex-1">
+                          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2 leading-tight">
+                            {exp.role}
+                          </h3>
+                          <p className="text-blue-600 dark:text-blue-400 font-semibold text-lg">
+                            {exp.company}
+                          </p>
+                        </div>
+                        <span className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full border border-blue-200 dark:border-blue-800">
+                          {exp.type}
                         </span>
-                      ))}
+                      </div>
+
+                      {/* Meta info */}
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-5">
+                        <div className="flex items-center gap-1.5">
+                          <Calendar size={16} className="text-blue-500" />
+                          <span className="font-medium">{exp.period}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <MapPin size={16} className="text-purple-500" />
+                          <span className="font-medium">{exp.location}</span>
+                        </div>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-gray-600 dark:text-gray-300 mb-5 leading-relaxed">
+                        {exp.description}
+                      </p>
+
+                      {/* Achievements */}
+                      <div className="mb-5">
+                        <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                          <Zap size={16} className="text-yellow-500" />
+                          Key Achievements
+                        </h4>
+                        <ul className="space-y-2">
+                          {exp.achievements.map((achievement, i) => (
+                            <motion.li
+                              key={i}
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: idx * 0.2 + i * 0.1 }}
+                              className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300"
+                            >
+                              <div className="mt-1.5 w-1.5 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex-shrink-0" />
+                              <span>{achievement}</span>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Technologies */}
+                      <div>
+                        <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                          <Code size={16} className="text-blue-500" />
+                          Technologies
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {exp.tech.map((tech, i) => (
+                            <motion.span
+                              key={i}
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: idx * 0.2 + i * 0.05 }}
+                              whileHover={{ scale: 1.1 }}
+                              className="px-3 py-1.5 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-lg border border-blue-100 dark:border-blue-800/50 hover:border-blue-300 dark:hover:border-blue-600 transition-all"
+                            >
+                              {tech}
+                            </motion.span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </motion.div>
                 </div>
+
+                {/* Empty space for alternating layout */}
+                <div className="hidden md:block md:w-1/2" />
               </motion.div>
             ))}
           </div>
         </div>
+
       </div>
     </section>
   );
 };
+
 
 // Skills Section
 const SkillsSection = () => {
@@ -823,25 +875,33 @@ const SkillsSection = () => {
       category: "AI & Machine Learning",
       icon: Brain,
       skills: ["Machine Learning", "Deep Learning", "Computer Vision", "Natural Language Processing", "Reinforcement Learning", "MLOps"],
-      color: "blue"
+      bgColor: "bg-blue-100 dark:bg-blue-900/30",
+      textColor: "text-blue-600 dark:text-blue-400",
+      dotColor: "bg-blue-500"
     },
     {
       category: "Data Engineering",
       icon: Database,
       skills: ["SQL & NoSQL", "Data Pipelines", "ETL Processes", "Big Data", "Data Warehousing", "Data Visualization"],
-      color: "purple"
+      bgColor: "bg-purple-100 dark:bg-purple-900/30",
+      textColor: "text-purple-600 dark:text-purple-400",
+      dotColor: "bg-purple-500"
     },
     {
       category: "Programming & Tools",
       icon: Code,
       skills: ["Python", "PyTorch", "TensorFlow", "Scikit-Learn", "Pandas", "Docker", "Git"],
-      color: "green"
+      bgColor: "bg-green-100 dark:bg-green-900/30",
+      textColor: "text-green-600 dark:text-green-400",
+      dotColor: "bg-green-500"
     },
     {
       category: "Cloud & DevOps",
       icon: Cloud,
       skills: ["AWS", "GCP", "Azure", "Kubernetes", "CI/CD", "MLflow", "FastAPI"],
-      color: "red"
+      bgColor: "bg-orange-100 dark:bg-orange-900/30",
+      textColor: "text-orange-600 dark:text-orange-400",
+      dotColor: "bg-orange-500"
     }
   ];
 
@@ -877,8 +937,8 @@ const SkillsSection = () => {
                 className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 hover:shadow-xl transition-all"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`p-2 rounded-lg bg-${category.color}-100 dark:bg-${category.color}-900/30`}>
-                    <Icon className={`text-${category.color}-600 dark:text-${category.color}-400`} size={20} />
+                  <div className={`p-2 rounded-lg ${category.bgColor}`}>
+                    <Icon className={category.textColor} size={20} />
                   </div>
                   <h3 className="font-bold text-gray-900 dark:text-white text-lg">
                     {category.category}
@@ -894,7 +954,7 @@ const SkillsSection = () => {
                       transition={{ delay: skillIdx * 0.05 }}
                       className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300 transition-colors"
                     >
-                      <div className={`w-1.5 h-1.5 bg-${category.color}-500 rounded-full`} />
+                      <div className={`w-1.5 h-1.5 ${category.dotColor} rounded-full`} />
                       {skill}
                     </motion.div>
                   ))}
@@ -907,7 +967,6 @@ const SkillsSection = () => {
     </section>
   );
 };
-
 // Projects Section with grid layout
 const ProjectsSection = () => {
   const projects = [
@@ -1107,7 +1166,7 @@ const CertificationsSection = () => {
       title: "Advanced SQL",
       issuer: "365 Data Science",
       date: "2023",
-      image: "/images/certifications/advancedSQL.jpg", 
+      image: "/images/certifications/ASQL-BsghoSsW.png.png", 
       link: "https://learn.365datascience.com/certificates/CC-FF10CFFD9D/",
       skills: ["SQL", "Database", "Data Analysis"]
     },
@@ -1591,7 +1650,7 @@ const Footer = () => {
 // ----------------------------------------------------------------
 
 const Portfolio = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
   const [mounted, setMounted] = useState(false);
 
