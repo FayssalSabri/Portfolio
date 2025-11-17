@@ -571,7 +571,7 @@ const AboutSection = () => {
                   degree: "M.Eng. Data & AI in Industrial Engineering", 
                   school: "École Centrale de Lyon", 
                   year: "2024-2025",
-                  location: "Paris, France"
+                  location: "Lyon, France"
                 },
                 { 
                   degree: "DESECL - Industrial Risk Management", 
