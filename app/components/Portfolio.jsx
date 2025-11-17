@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Brain, Code, Database, Cloud, Rocket, Users, Mail, MapPin, 
+  Brain, Code, Database, Cloud, Rocket, User, Mail, MapPin, 
   Calendar, ArrowUpRight, ExternalLink, ChevronRight, ChevronLeft,
   Github, Linkedin, Twitter, FileText, Award, School,
   Briefcase, Cpu, Zap, Sparkles, ArrowRight, Phone,
@@ -522,11 +522,11 @@ const HeroSection = ({ onSectionClick }) => {
   );
 };
 
-// About Section with clean layout
+// About Section with clean layout - All sections in blue theme
 const AboutSection = () => {
   return (
-    <section id="about" className="py-20 px-6 bg-gray-50/50 dark:bg-gray-800/20">
-      <div className="max-w-6xl mx-auto">
+    <section id="about" className="py-20 px-6 bg-gray-50/50 dark:bg-gray-900/50">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -543,117 +543,207 @@ const AboutSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left Column - Text */}
+        <div className="grid lg:grid-cols-12 gap-8">
+          {/* Left Column - Profile Card */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            className="space-y-6"
+            className="lg:col-span-4"
           >
-            <div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-                Background
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-                I'm a dual-degree engineer from <span className="font-semibold text-gray-900 dark:text-white">Arts et Métiers</span> and <span className="font-semibold text-gray-900 dark:text-white">École Centrale de Lyon</span>, specializing in AI and Data Science. My journey combines rigorous engineering fundamentals with cutting-edge machine learning expertise.
-              </p>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                I thrive on building end-to-end AI systems that deliver measurable impact, from conceptualization and data exploration to deployment and monitoring in production environments.
-              </p>
-            </div>
-
-            {/* Education */}
-            <div className="space-y-4">
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Education</h4>
-              {[
-                { 
-                  degree: "M.Eng. Data & AI in Industrial Engineering", 
-                  school: "École Centrale de Lyon", 
-                  year: "2024-2025",
-                  location: "Lyon, France"
-                },
-                { 
-                  degree: "DESECL - Industrial Risk Management", 
-                  school: "École Centrale de Lyon", 
-                  year: "2024-2025",
-                  location: "Lyon, France"
-                },
-                { 
-                  degree: "State Engineer - AI & Data Science", 
-                  school: "ENSAM Meknès", 
-                  year: "2020-2025",
-                  location: "Meknès, Morocco"
-                }
-              ].map((edu, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="flex items-start gap-3 p-4 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/30 transition-all border border-gray-100 dark:border-gray-700"
-                >
-                  <School size={20} className="text-blue-600 dark:text-blue-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <h5 className="font-semibold text-gray-900 dark:text-white text-sm">{edu.degree}</h5>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{edu.school}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-500">{edu.year} • {edu.location}</p>
+            <div className="sticky top-24">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="rounded-2xl p-6 border-l-4 border-blue-600 dark:border-blue-400"
+              >
+                <img
+                  src="/images/profile/fayssal_.jpg"
+                  alt="Fayssal Sabri"
+                  className="w-full aspect-square rounded-xl object-cover mb-4 ring-2 ring-gray-200 dark:ring-gray-700"
+                  onError={(e) => {
+                    e.target.outerHTML = `
+                      <div class="w-full aspect-square rounded-xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center mb-4 ring-2 ring-gray-200 dark:ring-gray-700">
+                        <span class="text-gray-400 dark:text-gray-600 font-bold text-4xl">FS</span>
+                      </div>
+                    `;
+                  }}
+                />
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                  Fayssal Sabri
+                </h3>
+                <p className="text-blue-600 dark:text-blue-400 font-medium mb-4">
+                  AI & Data Science Engineer
+                </p>
+                
+                {/* Quick Info */}
+                <div className="space-y-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                    <MapPin size={16} className="text-blue-600 dark:text-blue-400" />
+                    <span>Paris, France</span>
                   </div>
-                </motion.div>
-              ))}
+                  <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                    <Briefcase size={16} className="text-blue-600 dark:text-blue-400" />
+                    <span>Open to opportunities</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                    <Mail size={16} className="text-blue-600 dark:text-blue-400" />
+                    <span className="truncate">fayssal.sabri.pro@gmail.com</span>
+                  </div>
+                </div>
+
+                {/* Social Links */}
+                <div className="flex gap-3 mt-6">
+                  <motion.a
+                    href="https://linkedin.com/in/fayssalsabri"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-all"
+                  >
+                    <Linkedin size={16} />
+                    LinkedIn
+                  </motion.a>
+                  <motion.a
+                    href="https://github.com/fayssalsabri"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center justify-center px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg transition-all"
+                  >
+                    <Github size={20} />
+                  </motion.a>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
 
-          {/* Right Column - Languages */}
+          {/* Right Column - Content */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            className="space-y-8"
+            className="lg:col-span-8 space-y-6"
           >
-            {/* Languages */}
-            <div>
-              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Languages</h3>
-              <div className="space-y-4">
-                {[
-                  { language: "French", level: "Native", flag: "🇫🇷" },
-                  { language: "English", level: "Professional Proficiency (C1)", flag: "🇬🇧" },
-                  { language: "Spanish", level: "Basic knowledge (A1)", flag: "🇪🇸" },
-                  { language: "Arabic", level: "Native", flag: "🇲🇦" }
-                ].map((lang, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="flex items-center justify-between p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-md transition-all"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">{lang.flag}</span>
-                      <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-white">{lang.language}</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">{lang.level}</p>
+            {/* Background */}
+            <div className="rounded-2xl p-6 sm:p-8 border-l-4 border-blue-600 dark:border-blue-400">
+              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+                <User size={24} className="text-blue-600 dark:text-blue-400" />
+                Background
+              </h3>
+              <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p>
+                  I'm a dual-degree engineer from <span className="font-semibold text-gray-900 dark:text-white">Arts et Métiers</span> and <span className="font-semibold text-gray-900 dark:text-white">École Centrale de Lyon</span>, specializing in AI and Data Science. My journey combines rigorous engineering fundamentals with cutting-edge machine learning expertise.
+                </p>
+                <p>
+                  I thrive on building end-to-end AI systems that deliver measurable impact, from conceptualization and data exploration to deployment and monitoring in production environments.
+                </p>
+              </div>
+            </div>
+
+            {/* Education & Languages Grid */}
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Education */}
+              <div className="rounded-2xl p-6 border-l-4 border-blue-600 dark:border-blue-400">
+                <h3 className="text-xl font-bold mb-5 text-gray-900 dark:text-white flex items-center gap-2">
+                  <School size={20} className="text-blue-600 dark:text-blue-400" />
+                  Education
+                </h3>
+                <div className="space-y-5">
+                  {[
+                    { 
+                      degree: "M.Eng. Data & AI", 
+                      school: "École Centrale de Lyon", 
+                      year: "2024-2025",
+                      location: "Paris, FR"
+                    },
+                    { 
+                      degree: "DESECL - Risk Management", 
+                      school: "École Centrale de Lyon", 
+                      year: "2024-2025",
+                      location: "Lyon, FR"
+                    },
+                    { 
+                      degree: "State Engineer - AI", 
+                      school: "ENSAM Meknès", 
+                      year: "2020-2025",
+                      location: "Meknès, MA"
+                    }
+                  ].map((edu, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 }}
+                      className="relative pl-5 border-l-2 border-blue-600 dark:border-blue-400"
+                    >
+                      <div className="absolute -left-[5px] top-1 w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full" />
+                      <h5 className="font-bold text-gray-900 dark:text-white text-sm mb-1 leading-tight">{edu.degree}</h5>
+                      <p className="text-blue-600 dark:text-blue-400 font-semibold text-xs mb-0.5">{edu.school}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-500">{edu.year} • {edu.location}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Languages */}
+              <div className="rounded-2xl p-6 border-l-4 border-blue-600 dark:border-blue-400">
+                <h3 className="text-xl font-bold mb-5 text-gray-900 dark:text-white flex items-center gap-2">
+                  <Languages size={20} className="text-blue-600 dark:text-blue-400" />
+                  Languages
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    { language: "French", level: "Native", code: "FR" },
+                    { language: "English", level: "Professional (C1)", code: "EN" },
+                    { language: "Arabic", level: "Native", code: "AR" },
+                    { language: "Spanish", level: "Basic (A1)", code: "ES" }
+                  ].map((lang, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 }}
+                      className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                          <span className="font-bold text-blue-600 dark:text-blue-400 text-xs">{lang.code}</span>
+                        </div>
+                        <h4 className="font-semibold text-gray-900 dark:text-white text-sm">{lang.language}</h4>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
+                      <p className="text-xs text-gray-600 dark:text-gray-400">{lang.level}</p>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* Interests */}
-            <div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Interests</h3>
-              <div className="flex flex-wrap gap-3">
+            <div className="rounded-2xl p-6 border-l-4 border-blue-600 dark:border-blue-400">
+              <h3 className="text-xl font-bold mb-5 text-gray-900 dark:text-white flex items-center gap-2">
+                <Sparkles size={20} className="text-blue-600 dark:text-blue-400" />
+                Interests & Activities
+              </h3>
+              <div className="flex flex-wrap gap-2">
                 {[
-                  "AI & Data Science", "Technology Watch & Innovation",, "Hackathons", "Problem Solving & Logical Reasoning",
-                  "Continuous Learning", "Traveling"
+                  "AI Research", "Open Source", "Robotics", "Technology Watch & Innovation", "Hackathons",
+                  "Problem Solving & Logical Reasoning", "Continuous Learning", "Technical Writing"
                 ].map((interest, idx) => (
                   <motion.span
                     key={idx}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
                     transition={{ delay: idx * 0.05 }}
-                    className="px-3 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-lg text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-800/40 transition-all"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    className="px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 rounded-lg text-sm font-medium border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-all cursor-default"
                   >
                     {interest}
                   </motion.span>
@@ -666,7 +756,6 @@ const AboutSection = () => {
     </section>
   );
 };
-
 // Experience Section with timeline
 const ExperienceSection = () => {
   const experiences = [
