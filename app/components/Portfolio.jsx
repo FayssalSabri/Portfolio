@@ -1236,6 +1236,15 @@ const ProjectsSection = () => {
 const CertificationsSection = () => {
   const certifications = [
     {
+    title: "AI Model Deployment on AWS",
+    issuer: "365 Data Science",
+    date: "2025",
+    image: "/images/certifications/AWS.jpg",
+    link: "https://learn.365datascience.com/certificates/CC-60F987FA73/",
+    skills: ["AWS","AWS Lambda","Amazon ECS (EC2 & Fargate)","Amazon SageMaker","Model Deployment","Traffic Shifting","A/B Testing","Canary Deployments","Blue-Green Deployment","Shadow Deployment","Cloud Computing"
+    ]
+    },
+    {
       title: "Machine Learning Specialization",
       issuer: "Stanford University (Coursera)",
       date: "2024",
