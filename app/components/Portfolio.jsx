@@ -1166,7 +1166,7 @@ const CertificationsSection = () => {
       title: "Advanced SQL",
       issuer: "365 Data Science",
       date: "2023",
-      image: "/images/certifications/ASQL-BsghoSsW.png.png", 
+      image: "/images/certifications/ASQL-BsghoSsW.png", 
       link: "https://learn.365datascience.com/certificates/CC-FF10CFFD9D/",
       skills: ["SQL", "Database", "Data Analysis"]
     },
