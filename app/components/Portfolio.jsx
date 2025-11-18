@@ -457,7 +457,7 @@ const HeroSection = ({ onSectionClick }) => {
         >
           {[
             { number: '10+', label: 'Projects' },
-            { number: '6', label: 'Certifications' },
+            { number: '8', label: 'Certifications' },
             { number: '3', label: 'Hackathons' },
             { number: '15+', label: 'Technologies' }
           ].map((stat, idx) => (
@@ -1244,6 +1244,15 @@ const CertificationsSection = () => {
     skills: ["AWS","AWS Lambda","Amazon ECS (EC2 & Fargate)","Amazon SageMaker","Model Deployment","Traffic Shifting","A/B Testing","Canary Deployments","Blue-Green Deployment","Shadow Deployment","Cloud Computing"
     ]
     },
+        {
+    title: "Intro to google cloud",
+    issuer: "365 Data Science",
+    date: "2025",
+    image: "/images/certifications/GCP.jpg",
+    link: "https://learn.365datascience.com/certificates/CC-B0DF0ACD3F/",
+    skills: ["GCP","Google Cloud Platform","Cloud Computing","Compute Engine","Cloud Storage","BigQuery","Cloud Functions","App Engine"]
+    },
+    
     {
       title: "Machine Learning Specialization",
       issuer: "Stanford University (Coursera)",
