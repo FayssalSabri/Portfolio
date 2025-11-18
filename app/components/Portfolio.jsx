@@ -1257,7 +1257,7 @@ const CertificationsSection = () => {
       title: "Machine Learning Specialization",
       issuer: "Stanford University (Coursera)",
       date: "2024",
-      image: "/images/certifications/MLS-DBzv1e_Z.png", 
+      image: "/images/certifications/MLS-DBzv1e_Z.jpg", 
       link: "https://www.coursera.org/account/accomplishments/specialization/VF663RCLC57N",
       skills: ["Machine Learning", "Deep Learning", "AI Fundamentals"]
     },
@@ -1273,7 +1273,7 @@ const CertificationsSection = () => {
       title: "Advanced SQL",
       issuer: "365 Data Science",
       date: "2023",
-      image: "/images/certifications/ASQL-BsghoSsW.png", 
+      image: "/images/certifications/ASQL-BsghoSsW.jpg", 
       link: "https://learn.365datascience.com/certificates/CC-FF10CFFD9D/",
       skills: ["SQL", "Database", "Data Analysis"]
     },
@@ -1281,7 +1281,7 @@ const CertificationsSection = () => {
       title: "Git & GitHub",
       issuer: "365 Data Science",
       date: "2023",
-      image: "/images/certifications/gitandgithub.png", 
+      image: "/images/certifications/gitandgithub.jpg", 
       link: "https://learn.365datascience.com/certificates/CC-6FB9E230D9/",
       skills: ["Version Control", "Git", "Collaboration"]
     },
