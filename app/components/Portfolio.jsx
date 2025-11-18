@@ -1297,7 +1297,7 @@ const CertificationsSection = () => {
       title: "Agile and Kanban",
       issuer: "Udemy",
       date: "2024",
-      image: "/images/certifications/agile-CizRE1_S.png", 
+      image: "/images/certifications/agile-CizRE1_S.jpg", 
       link: "https://www.udemy.com/certificate/UC-9cd64e94-cdd1-43b3-a548-d1cf5ed2f1d6/",
       skills: ["Agile Methodologies", "Kanban", "Project Management"]
     }
