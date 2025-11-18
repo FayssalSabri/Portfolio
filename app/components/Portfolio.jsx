@@ -1421,7 +1421,7 @@ const CertificationsSection = () => {
               {[
                 { number: certifications.length, label: 'Certifications' },
                 { number: '4', label: 'Platforms' },
-                { number: '2023-2024', label: 'Period' }
+                { number: '2023-2025', label: 'Period' }
               ].map((stat, idx) => (
                 <div key={idx} className="text-center">
                   <div className="text-lg font-bold text-blue-600 dark:text-blue-400 mb-1">
