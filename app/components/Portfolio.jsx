@@ -299,7 +299,7 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, onThemeToggle }) 
             onClick={() => handleSectionClick('home')}
           >
             <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-              <Logo showSignature={true} size="small" />
+              <Logo variant="outline" />
             </div>
           </motion.div>
 
@@ -467,7 +467,7 @@ const HeroSection = ({ onSectionClick }) => {
   
   const roles = [
     'AI & Data Science',
-    'Machine Learning & Deep Learning',
+    'ML & DL',
     'Computer Vision',
     'NLP & LLMs',
     'MLOps & Deployment'
