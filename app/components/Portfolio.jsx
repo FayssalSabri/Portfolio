@@ -238,9 +238,10 @@ const ScrollToTop = () => {
   );
 };
 
-// Enhanced Navigation with smooth scroll
+// Enhanced Navigation with mobile menu - FIXED
 const Navigation = ({ activeSection, onSectionClick, darkMode, onThemeToggle }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -250,6 +251,24 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, onThemeToggle }) 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Fermer le menu mobile lors du clic sur une section
+  const handleSectionClick = (sectionId) => {
+    setIsMobileMenuOpen(false);
+    // Petit délai pour permettre la fermeture du menu avant le scroll
+    setTimeout(() => {
+      onSectionClick(sectionId);
+    }, 100);
+  };
+
+  // Fermer le menu lors du scroll
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      const handleScroll = () => setIsMobileMenuOpen(false);
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [isMobileMenuOpen]);
 
   const sections = [
     { id: 'home', label: 'Home' },
@@ -267,8 +286,8 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, onThemeToggle }) 
       animate={{ y: 0 }}
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-sm border-b border-gray-200/50 dark:border-gray-700/50' 
-          : 'bg-transparent'
+          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl shadow-lg border-b border-gray-200/50 dark:border-gray-700/50' 
+          : 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
@@ -276,12 +295,12 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, onThemeToggle }) 
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-2 cursor-pointer"
-            onClick={() => onSectionClick('home')}
+            className="flex items-center gap-2 cursor-pointer z-50"
+            onClick={() => handleSectionClick('home')}
           >
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-            <Logo showSignature={true} size="small" />
-          </div>
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+              <Logo showSignature={true} size="small" />
+            </div>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -311,27 +330,27 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, onThemeToggle }) 
           </div>
 
           {/* Right side actions */}
-          <div className="flex items-center gap-4">
-          {/* Theme Toggle */}
-          <motion.button
-            onClick={onThemeToggle}
-            whileHover={{ scale: 1.1, rotate: 15 }}
-            whileTap={{ scale: 0.9 }}
-            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
-            aria-label="Toggle theme"
-          >
-            {darkMode ? (
-              <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fillRule="evenodd" clipRule="evenodd"></path>
-              </svg>
-            ) : (
-              <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-              </svg>
-            )}
-          </motion.button>
+          <div className="flex items-center gap-2 sm:gap-4">
+            {/* Theme Toggle */}
+            <motion.button
+              onClick={onThemeToggle}
+              whileHover={{ scale: 1.1, rotate: 15 }}
+              whileTap={{ scale: 0.9 }}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all z-50"
+              aria-label="Toggle theme"
+            >
+              {darkMode ? (
+                <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fillRule="evenodd" clipRule="evenodd"></path>
+                </svg>
+              ) : (
+                <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+              )}
+            </motion.button>
 
-            {/* Contact CTA */}
+            {/* Contact CTA - Desktop only */}
             <motion.button
               onClick={() => onSectionClick('contact')}
               whileHover={{ scale: 1.05 }}
@@ -341,8 +360,100 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, onThemeToggle }) 
               <Mail size={16} />
               Contact
             </motion.button>
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              whileTap={{ scale: 0.95 }}
+              className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all z-50"
+              aria-label="Toggle menu"
+            >
+              <AnimatePresence mode="wait">
+                {isMobileMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X size={20} className="text-gray-600 dark:text-gray-400" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <svg className="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden"
+            >
+              <motion.div 
+                initial={{ y: -20 }}
+                animate={{ y: 0 }}
+                exit={{ y: -20 }}
+                className="py-4 space-y-2 border-t border-gray-200 dark:border-gray-700 mt-4"
+              >
+                {sections.map((section, idx) => (
+                  <motion.button
+                    key={section.id}
+                    onClick={() => handleSectionClick(section.id)}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`w-full text-left px-4 py-3 rounded-lg font-medium text-sm transition-all flex items-center justify-between ${
+                      activeSection === section.id
+                        ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                    }`}
+                  >
+                    <span>{section.label}</span>
+                    {activeSection === section.id && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"
+                      />
+                    )}
+                  </motion.button>
+                ))}
+                
+                {/* Mobile Contact Button */}
+                <motion.button
+                  onClick={() => handleSectionClick('contact')}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: sections.length * 0.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-all mt-4"
+                >
+                  <Mail size={16} />
+                  Contact Me
+                </motion.button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.nav>
   );
