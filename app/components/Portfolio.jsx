@@ -457,7 +457,7 @@ const HeroSection = ({ onSectionClick }) => {
         >
           {[
             { number: '10+', label: 'Projects' },
-            { number: '8', label: 'Certifications' },
+            { number: '10', label: 'Certifications' },
             { number: '3', label: 'Hackathons' },
             { number: '15+', label: 'Technologies' }
           ].map((stat, idx) => (
@@ -1270,11 +1270,27 @@ const CertificationsSection = () => {
       skills: ["Deep Learning", "Keras", "Neural Networks"]
     },
     {
+      title: "Building Data Pipelines with Apache Airflow",
+      issuer: "365 Data Science",
+      date: "2025",
+      image: "/images/certifications/Apach_airflow_CC-5C3E790667.jpg", 
+      link: "https://learn.365datascience.com/certificates/CC-5C3E790667/",
+      skills: ["Apache Airflow", "Data Pipelines", "ETL Processes"]
+    },
+    {
       title: "Advanced SQL",
       issuer: "365 Data Science",
       date: "2023",
       image: "/images/certifications/ASQL-BsghoSsW.jpg", 
       link: "https://learn.365datascience.com/certificates/CC-FF10CFFD9D/",
+      skills: ["SQL", "Database", "Data Analysis"]
+    },
+        {
+      title: "MCPs for Everyone: Supercharge Your AI Tooling Skills",
+      issuer: "365 Data Science",
+      date: "2023",
+      image: "/images/certifications/MCP-CC-64FB4D650A_page-0001.jpg", 
+      link: "https://learn.365datascience.com/certificates/CC-64FB4D650A/",
       skills: ["SQL", "Database", "Data Analysis"]
     },
     {
