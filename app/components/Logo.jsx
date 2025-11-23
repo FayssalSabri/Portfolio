@@ -4,7 +4,7 @@ const Logo = ({
   size = 60, 
   className = "", 
   logoUrl = "/images/logo/Logo2.png",
-  darkModeLogoUrl = "/images/logo/Logo2.png" // Optionnel: version pour dark mode
+  darkModeLogoUrl = "/images/logo/Logo2.png"
 }) => {
   return (
     <div className={`${className}`}>
