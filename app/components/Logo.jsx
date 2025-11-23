@@ -1,36 +1,20 @@
 import React from 'react';
+import Image from 'next/image';
 
 const Logo = ({ 
   size = 60, 
-  className = "", 
-  logoUrl = "/images/logo/Logo.png",
-  darkModeLogoUrl = "/images/logo/Logo.png"
+  className = "" 
 }) => {
   return (
-    <div className={`${className}`}>
-      {/* Version light mode */}
-      <img
-        src={logoUrl}
-        alt="Fayssal Sabri Logo"
-        className="object-contain dark:hidden transition-all"
-        style={{ 
-          width: `${size}px`, 
-          height: `${size}px`
-        }}
+    <div className={`relative ${className}`} style={{ width: size, height: size }}>
+      <Image
+        src="/images/logo/Logo.png"
+        alt="Fayssal Sabri"
+        fill
+        sizes={`${size}px`}
+        className="object-contain"
+        priority
       />
-      
-      {/* Version dark mode (si fournie) */}
-      {darkModeLogoUrl && (
-        <img
-          src={darkModeLogoUrl}
-          alt="Fayssal Sabri Logo"
-          className="object-contain hidden dark:block transition-all"
-          style={{ 
-            width: `${size}px`, 
-            height: `${size}px`
-          }}
-        />
-      )}
     </div>
   );
 };
