@@ -1,21 +1,30 @@
+// components/Logo.js
 import React from 'react';
-import Image from 'next/image';
 
 const Logo = ({ 
   size = 60, 
   className = "" 
 }) => {
   return (
-    <div className={`relative ${className}`} style={{ width: size, height: size }}>
-      <Image
-        src="/images/logo/Logo.png"
-        alt="Fayssal Sabri"
-        fill
-        sizes={`${size}px`}
-        className="object-contain"
-        priority
-      />
-    </div>
+    <img
+      src="/Logo.png"  // Chemin direct depuis la racine public
+      alt="Fayssal Sabri Logo"
+      className={`object-contain ${className}`}
+      style={{ 
+        width: `${size}px`, 
+        height: `${size}px`
+      }}
+      onError={(e) => {
+        console.error('Logo failed to load');
+        // Fallback simple
+        e.target.outerHTML = `
+          <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg text-white font-bold ${className}" 
+               style="width: ${size}px; height: ${size}px; font-size: ${size * 0.3}px">
+            FS
+          </div>
+        `;
+      }}
+    />
   );
 };
 
