@@ -3,8 +3,8 @@ import React from 'react';
 const Logo = ({ 
   size = 60, 
   className = "", 
-  logoUrl = "/images/logo/Logo2.png",
-  darkModeLogoUrl = "/images/logo/Logo2.png"
+  logoUrl = "/images/logo/Logo.png",
+  darkModeLogoUrl = "/images/logo/Logo.png"
 }) => {
   return (
     <div className={`${className}`}>
