@@ -1,269 +1,121 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'framer-motion';
 
-const Logo = ({ showSignature = false, size = "medium", showText = false, className = "", variant = "default" }) => {
-  // Tailles prédéfinies
-  const sizeMap = {
-    small: 32,
-    medium: 48,
-    large: 64,
-    xlarge: 80,
-    xxlarge: 120
-  };
+const Logo = ({ 
+  size = 40, 
+  className = "",
+  showText = false,
+  animated = true
+}) => {
+  
+  const strokeWidth = size * 0.1;
 
-  const logoSize = typeof size === 'string' ? sizeMap[size] || sizeMap.medium : size;
-
-  // Couleurs selon la variante
-  const getColors = () => {
-    switch (variant) {
-      case "monochrome":
-        return {
-          stroke: "currentColor",
-          fill: "currentColor",
-          opacity: "0.9"
-        };
-      case "outline":
-        return {
-          stroke: "currentColor",
-          fill: "none",
-          opacity: "0.8"
-        };
-      default:
-        return {
-          stroke: "currentColor",
-          fill: "currentColor",
-          opacity: "0.9"
-        };
+  const signature = {
+    hidden: { pathLength: 0, opacity: 0 },
+    visible: { 
+      pathLength: 1, 
+      opacity: 1,
+      transition: { 
+        duration: 1.8,
+        ease: [0.43, 0.13, 0.23, 0.96] // Courbe naturelle d'écriture
+      }
     }
   };
 
-  const colors = getColors();
-
-  if (showSignature) {
-    return (
-      <div className={`flex flex-col items-center gap-3 ${className}`}>
-        <svg 
-          width={logoSize} 
-          height={logoSize} 
-          viewBox="0 0 200 200" 
-          className="transition-transform hover:scale-105"
-        >
-          {/* Cercle background très subtil */}
-          <circle cx="100" cy="100" r="90" fill="currentColor" opacity="0.05"/>
-          
-          {/* F avec design tech - version épurée */}
-          <path 
-            d="M 65 65 L 120 65 L 120 75 L 75 75 L 75 95 L 110 95 L 110 105 L 75 105 L 75 135" 
-            stroke={colors.stroke}
-            strokeWidth="6" 
-            strokeLinecap="square"
-            fill="none"
-            opacity={colors.opacity}
-          />
-          
-          {/* Points tech décoratifs - version discrète */}
-          <circle cx="125" cy="70" r="3" fill={colors.fill} opacity="0.7"/>
-          <circle cx="115" cy="100" r="3" fill={colors.fill} opacity="0.7"/>
-          <circle cx="80" cy="140" r="3" fill={colors.fill} opacity="0.7"/>
-          
-          {/* S avec design tech */}
-          <path 
-            d="M 130 80 L 145 80 Q 155 80 155 90 Q 155 100 145 100 L 135 100 Q 125 100 125 110 Q 125 120 135 120 L 150 120" 
-            stroke={colors.stroke}
-            strokeWidth="6" 
-            strokeLinecap="square"
-            fill="none"
-            opacity={colors.opacity}
-          />
-        </svg>
-        {showText && (
-          <div className="text-center">
-            <p className="text-xl font-semibold text-gray-900 dark:text-white">
-              Fayssal Sabri
-            </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400">AI & Data Science</p>
-          </div>
-        )}
-      </div>
-    );
-  }
+  const dotAppear = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: { 
+      scale: 1, 
+      opacity: 1,
+      transition: { 
+        delay: 1.6,
+        type: "spring",
+        stiffness: 300
+      }
+    }
+  };
 
   return (
-    <div className={`inline-flex items-center justify-center ${className}`}>
-      <svg 
-        width={logoSize} 
-        height={logoSize} 
-        viewBox="0 0 200 200" 
-        className="transition-transform hover:scale-105"
+    <div className={`inline-flex items-center gap-3 select-none ${className}`}>
+      <motion.div 
+        className="relative"
+        style={{ width: size * 1.2, height: size }}
+        initial="hidden"
+        animate={animated ? "visible" : "hidden"}
+        whileHover={{ scale: 1.05 }}
       >
-        {/* Version épurée sans background */}
-        
-        {/* F avec design tech */}
-        <path 
-          d="M 65 65 L 120 65 L 120 75 L 75 75 L 75 95 L 110 95 L 110 105 L 75 105 L 75 135" 
-          stroke={colors.stroke}
-          strokeWidth="6" 
-          strokeLinecap="square"
-          fill="none"
-          opacity={colors.opacity}
-        />
-        
-        {/* Points tech décoratifs réduits */}
-        <circle cx="125" cy="70" r="2.5" fill={colors.fill} opacity="0.8"/>
-        <circle cx="115" cy="100" r="2.5" fill={colors.fill} opacity="0.8"/>
-        <circle cx="80" cy="140" r="2.5" fill={colors.fill} opacity="0.8"/>
-        
-        {/* S avec design tech */}
-        <path 
-          d="M 130 80 L 145 80 Q 155 80 155 90 Q 155 100 145 100 L 135 100 Q 125 100 125 110 Q 125 120 135 120 L 150 120" 
-          stroke={colors.stroke}
-          strokeWidth="6" 
-          strokeLinecap="square"
-          fill="none"
-          opacity={colors.opacity}
-        />
-      </svg>
-    </div>
-  );
-};
-
-// Version alternative avec différentes variantes
-export const LogoVariants = {
-  // Version Pro (par défaut)
-  Pro: (props) => <Logo {...props} />,
-  
-  // Version avec contour seulement
-  Outline: (props) => <Logo {...props} variant="outline" />,
-  
-  // Version monochrome
-  Monochrome: (props) => <Logo {...props} variant="monochrome" />,
-  
-  // Version avec texte professionnel
-  WithText: ({ size = 120, showText = true, className = "" }) => (
-    <div className={`flex flex-col items-center gap-3 ${className}`}>
-      <svg 
-        width={size} 
-        height={size} 
-        viewBox="0 0 200 200" 
-        className="transition-transform hover:scale-105 text-gray-900 dark:text-white"
-      >
-        {/* Design épuré */}
-        <path 
-          d="M 65 65 L 120 65 L 120 75 L 75 75 L 75 95 L 110 95 L 110 105 L 75 105 L 75 135" 
-          stroke="currentColor"
-          strokeWidth="6" 
-          strokeLinecap="square"
-          fill="none"
-          opacity="0.9"
-        />
-        
-        {/* Points discrets */}
-        <circle cx="125" cy="70" r="3" fill="currentColor" opacity="0.7"/>
-        <circle cx="115" cy="100" r="3" fill="currentColor" opacity="0.7"/>
-        <circle cx="80" cy="140" r="3" fill="currentColor" opacity="0.7"/>
-        
-        {/* S design */}
-        <path 
-          d="M 130 80 L 145 80 Q 155 80 155 90 Q 155 100 145 100 L 135 100 Q 125 100 125 110 Q 125 120 135 120 L 150 120" 
-          stroke="currentColor"
-          strokeWidth="6" 
-          strokeLinecap="square"
-          fill="none"
-          opacity="0.9"
-        />
-      </svg>
-      {showText && (
-        <div className="text-center">
-          <p className="text-xl font-semibold text-gray-900 dark:text-white tracking-tight">
-            Fayssal Sabri
-          </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">AI & Data Science Engineer</p>
-        </div>
-      )}
-    </div>
-  ),
-  
-  // Version minimaliste pour la navigation
-  Minimal: ({ size = "medium", className = "" }) => {
-    const sizeMap = {
-      small: 32,
-      medium: 48,
-      large: 64,
-      xlarge: 80
-    };
-
-    const logoSize = sizeMap[size] || sizeMap.medium;
-
-    return (
-      <svg 
-        width={logoSize} 
-        height={logoSize} 
-        viewBox="0 0 200 200" 
-        className={`transition-transform hover:scale-105 text-gray-900 dark:text-white ${className}`}
-      >
-        {/* Version ultra épurée pour navigation */}
-        <path 
-          d="M 65 65 L 120 65 L 120 75 L 75 75 L 75 95 L 110 95 L 110 105 L 75 105 L 75 135 M 130 80 L 145 80 Q 155 80 155 90 Q 155 100 145 100 L 135 100 Q 125 100 125 110 Q 125 120 135 120 L 150 120" 
-          stroke="currentColor"
-          strokeWidth="5" 
-          strokeLinecap="square"
-          fill="none"
-          opacity="0.9"
-        />
-      </svg>
-    );
-  },
-
-  // Version badge professionnel
-  Badge: ({ size = "medium", className = "" }) => {
-    const sizeMap = {
-      small: 40,
-      medium: 56,
-      large: 72
-    };
-
-    const logoSize = sizeMap[size] || sizeMap.medium;
-
-    return (
-      <div className={`inline-flex items-center gap-3 ${className}`}>
         <svg 
-          width={logoSize} 
-          height={logoSize} 
-          viewBox="0 0 200 200" 
-          className="transition-transform hover:scale-105 text-gray-900 dark:text-white"
+          width="100%" 
+          height="100%" 
+          viewBox="0 0 120 100" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Cercle subtil */}
-          <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.2"/>
-          
-          {/* Logo principal */}
-          <path 
-            d="M 65 65 L 120 65 L 120 75 L 75 75 L 75 95 L 110 95 L 110 105 L 75 105 L 75 135" 
+          {/* Signature "F" naturelle */}
+          <motion.path
+            d="M30 25 C 30 25, 28 40, 30 55 C 32 70, 35 75, 35 75"
             stroke="currentColor"
-            strokeWidth="5" 
-            strokeLinecap="square"
-            fill="none"
-            opacity="0.9"
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            variants={signature}
           />
           
-          <path 
-            d="M 130 80 L 145 80 Q 155 80 155 90 Q 155 100 145 100 L 135 100 Q 125 100 125 110 Q 125 120 135 120 L 150 120" 
+          {/* Barre horizontale supérieure fluide */}
+          <motion.path
+            d="M30 35 C 35 33, 45 32, 50 35"
             stroke="currentColor"
-            strokeWidth="5" 
-            strokeLinecap="square"
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            variants={signature}
+          />
+          
+          {/* Barre médiane plus courte */}
+          <motion.path
+            d="M32 50 C 38 49, 42 48, 45 50"
+            stroke="currentColor"
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            variants={signature}
+          />
+
+          {/* Point de signature personnel */}
+          <motion.circle 
+            cx="60" 
+            cy="45" 
+            r="2.5" 
+            fill="currentColor"
+            variants={dotAppear}
+          />
+
+          {/* Légère courbe artistique */}
+          <motion.path
+            d="M65 40 Q 70 45, 65 50"
+            stroke="currentColor"
+            strokeWidth={strokeWidth * 0.8}
+            strokeLinecap="round"
             fill="none"
-            opacity="0.9"
+            variants={signature}
           />
         </svg>
-        <div className="flex flex-col">
-          <span className="font-bold text-gray-900 dark:text-white text-sm leading-none">
+      </motion.div>
+
+      {showText && (
+        <motion.div 
+          initial={{ opacity: 0, x: -5 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1.2 }}
+          className="flex flex-col justify-center"
+        >
+          <span className="text-sm font-light text-gray-900 dark:text-white leading-none tracking-wide">
             Fayssal Sabri
           </span>
-          <span className="text-gray-600 dark:text-gray-400 text-xs leading-none">
-            AI Engineer
-          </span>
-        </div>
-      </div>
-    );
-  }
+        </motion.div>
+      )}
+    </div>
+  );
 };
 
 export default Logo;

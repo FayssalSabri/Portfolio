@@ -299,7 +299,12 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, onThemeToggle }) 
             onClick={() => handleSectionClick('home')}
           >
             <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-              <Logo variant="outline" />
+              <Logo 
+                size={60}
+                showText={false}
+                className="text-gray-800 dark:text-gray-200"
+              />
+ 
             </div>
           </motion.div>
 
@@ -671,7 +676,7 @@ const AboutSection = () => {
                 className="rounded-2xl p-6 border-l-4 border-blue-600 dark:border-blue-400"
               >
                 <img
-                  src="/images/profile/fayssal_.jpg"
+                  src="/images/profile/FayssalSB.png"
                   alt="Fayssal Sabri"
                   className="w-full aspect-square rounded-xl object-cover mb-4 ring-2 ring-gray-200 dark:ring-gray-700"
                   onError={(e) => {
