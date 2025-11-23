@@ -1103,7 +1103,7 @@ const SkillsSection = () => {
     {
       category: "Cloud & DevOps",
       icon: Cloud,
-      skills: ["AWS", "GCP", "Azure", "Kubernetes", "CI/CD", "MLflow", "FastAPI"],
+      skills: ["AWS", "GCP", "Kubernetes", "CI/CD", "MLflow", "FastAPI"],
       bgColor: "bg-orange-100 dark:bg-orange-900/30",
       textColor: "text-orange-600 dark:text-orange-400",
       dotColor: "bg-orange-500"
