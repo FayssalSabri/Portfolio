@@ -10,6 +10,7 @@ import {
   BookOpen, Languages, Download, X, Image
 } from 'lucide-react';
 import Logo from '../components/Logo';
+import LoadingScreen from '../components/LoadingScreen';
 
 // ----------------------------------------------------------------
 // OPTIMIZED UTILITIES
@@ -29,7 +30,6 @@ const throttle = (func, limit) => {
 // LAZY LOADED COMPONENTS
 // ----------------------------------------------------------------
 
-// Certification Carousel Component
 // Certification Carousel Component
 const CertificationCarousel = ({ certifications }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -195,6 +195,7 @@ const CertificationCarousel = ({ certifications }) => {
     </div>
   );
 };
+
 // Scroll to top component
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -300,10 +301,9 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, onThemeToggle }) 
           >
             <div className="w-8 h-8 rounded-lg flex items-center justify-center">
               <Logo 
-                size={60}
+                size={32}
                 className="text-gray-800 dark:text-gray-200"
               />
- 
             </div>
           </motion.div>
 
@@ -871,6 +871,7 @@ const AboutSection = () => {
     </section>
   );
 };
+
 // Experience Section with timeline
 const ExperienceSection = () => {
   const experiences = [
@@ -1071,7 +1072,6 @@ const ExperienceSection = () => {
   );
 };
 
-
 // Skills Section
 const SkillsSection = () => {
   const skillCategories = [
@@ -1171,6 +1171,7 @@ const SkillsSection = () => {
     </section>
   );
 };
+
 // Projects Section with grid layout
 const ProjectsSection = () => {
   const projects = [
@@ -1891,9 +1892,17 @@ const Portfolio = () => {
   const [darkMode, setDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
   const [mounted, setMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
+    
+    // Simuler le chargement
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000); // 3 secondes de loading
+
+    return () => clearTimeout(timer);
   }, []);
 
   const scrollToSection = useCallback((sectionId) => {
@@ -1931,53 +1940,45 @@ const Portfolio = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [activeSection]);
 
-  if (!mounted) {
-    return (
-      <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
-        <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
-          <Brain className="text-white" size={24} />
-        </div>
-      </div>
-    );
-  }
+  // if (!mounted) {
+  //   return (
+  //     <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
+  //       <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
+  //         <Brain className="text-white" size={24} />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className={darkMode ? 'dark' : ''}>
       <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
-        {/* Navigation */}
-        <Navigation 
-          activeSection={activeSection}
-          onSectionClick={scrollToSection}
-          darkMode={darkMode}
-          onThemeToggle={() => setDarkMode(!darkMode)}
-        />
+        {/* Loading Screen */}
+        <AnimatePresence>
+          {isLoading && <LoadingScreen />}
+        </AnimatePresence>
 
-        {/* Hero Section */}
-        <HeroSection onSectionClick={scrollToSection} />
+        {/* Navigation et contenu principal */}
+        {!isLoading && (
+          <>
+            <Navigation 
+              activeSection={activeSection}
+              onSectionClick={scrollToSection}
+              darkMode={darkMode}
+              onThemeToggle={() => setDarkMode(!darkMode)}
+            />
 
-        {/* About Section */}
-        <AboutSection />
-
-        {/* Experience Section */}
-        <ExperienceSection />
-
-        {/* Skills Section */}
-        <SkillsSection />
-
-        {/* Projects Section */}
-        <ProjectsSection />
-
-        {/* Certifications Section */}
-        <CertificationsSection />
-
-        {/* Contact Section */}
-        <ContactSection />
-
-        {/* Footer */}
-        <Footer />
-
-        {/* Scroll to Top */}
-        <ScrollToTop />
+            <HeroSection onSectionClick={scrollToSection} />
+            <AboutSection />
+            <ExperienceSection />
+            <SkillsSection />
+            <ProjectsSection />
+            <CertificationsSection />
+            <ContactSection />
+            <Footer />
+            <ScrollToTop />
+          </>
+        )}
       </div>
     </div>
   );

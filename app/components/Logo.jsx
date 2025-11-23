@@ -1,4 +1,5 @@
-// components/Logo.js
+'use client';
+
 import React from 'react';
 
 const Logo = ({ 
@@ -7,7 +8,7 @@ const Logo = ({
 }) => {
   return (
     <img
-      src="/Logo.png"  // Chemin direct depuis la racine public
+      src="/Logo.png"
       alt="Fayssal Sabri Logo"
       className={`object-contain ${className}`}
       style={{ 
@@ -16,7 +17,6 @@ const Logo = ({
       }}
       onError={(e) => {
         console.error('Logo failed to load');
-        // Fallback simple
         e.target.outerHTML = `
           <div class="flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg text-white font-bold ${className}" 
                style="width: ${size}px; height: ${size}px; font-size: ${size * 0.3}px">
