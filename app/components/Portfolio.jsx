@@ -658,7 +658,7 @@ const AboutSection = () => {
                         degree: "M.Eng. Data & AI", 
                         school: "École Centrale de Lyon", 
                         year: "2024-2025",
-                        location: "Paris, FR"
+                        location: "Lyon, FR"
                       },
                       { 
                         degree: "DESECL - Risk Management", 
@@ -667,7 +667,7 @@ const AboutSection = () => {
                         location: "Lyon, FR"
                       },
                       { 
-                        degree: "State Engineer - AI", 
+                        degree: "Engineer - AI & Data Science", 
                         school: "ENSAM Meknès", 
                         year: "2020-2025",
                         location: "Meknès, MA"
