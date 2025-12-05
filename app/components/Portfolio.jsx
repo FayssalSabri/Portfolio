@@ -1183,6 +1183,14 @@ const CertificationsSection = () => {
       image: "/images/certifications/MLS-DBzv1e_Z.jpg", 
       link: "https://www.coursera.org/account/accomplishments/specialization/VF663RCLC57N",
       skills: ["Machine Learning", "Deep Learning", "AI Fundamentals"]
+    },    
+    {
+      title: "Advanced SQL",
+      issuer: "365 Data Science",
+      date: "2023",
+      image: "/images/certifications/ASQL-BsghoSsW.jpg", 
+      link: "https://learn.365datascience.com/certificates/CC-FF10CFFD9D/",
+      skills: ["SQL", "Database", "Data Analysis"]
     },
     {
       title: "Deep Learning & Keras",
@@ -1200,14 +1208,7 @@ const CertificationsSection = () => {
       link: "https://learn.365datascience.com/certificates/CC-5C3E790667/",
       skills: ["Apache Airflow", "Data Pipelines", "ETL Processes"]
     },
-    {
-      title: "Advanced SQL",
-      issuer: "365 Data Science",
-      date: "2023",
-      image: "/images/certifications/ASQL-BsghoSsW.jpg", 
-      link: "https://learn.365datascience.com/certificates/CC-FF10CFFD9D/",
-      skills: ["SQL", "Database", "Data Analysis"]
-    },
+
     {
       title: "MCPs for Everyone: Supercharge Your AI Tooling Skills",
       issuer: "365 Data Science",
