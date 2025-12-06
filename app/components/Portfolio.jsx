@@ -10,7 +10,7 @@ import {
   FileText, Zap, Sparkles, Menu, X,
   BarChart, Target as TargetIcon,
   GitBranch, Server, Layers, Palette, Terminal,
-  Award as AwardIcon, Check, Star, Image
+  Award as AwardIcon, Check, Star, Image,Sun, Moon
 } from 'lucide-react';
 
 // ----------------------------------------------------------------
@@ -64,13 +64,9 @@ const ThemeToggle = ({ darkMode, toggleTheme }) => (
     whileTap={{ scale: 0.95 }}
   >
     {darkMode ? (
-      <div className="w-5 h-5 flex items-center justify-center">
-        <div className="w-4 h-4 bg-yellow-300 rounded-full" />
-      </div>
+      <Sun size={20} />
     ) : (
-      <div className="w-5 h-5 flex items-center justify-center">
-        <div className="w-4 h-4 bg-gray-800 rounded-full" />
-      </div>
+      <Moon size={20} />
     )}
   </motion.button>
 );
@@ -217,7 +213,6 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, toggleTheme }) =>
             >
               <div className="py-2">
                 {sections.map((section) => {
-                  const Icon = section.icon;
                   return (
                     <button
                       key={section.id}
@@ -232,7 +227,6 @@ const Navigation = ({ activeSection, onSectionClick, darkMode, toggleTheme }) =>
                             : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
-                      <Icon size={18} />
                       <span className="font-medium">{section.label}</span>
                     </button>
                   );
@@ -257,7 +251,6 @@ const HeroSection = ({ onSectionClick, darkMode }) => {
   const roles = [
     'AI & Data Science',
     'Machine Learning',
-    'Computer Vision',
     'NLP & LLMs',
     'MLOps & Deployment'
   ];
@@ -766,7 +759,12 @@ const SkillsSection = ({ darkMode }) => {
                 <MinimalCard darkMode={darkMode} className="h-full">
                   {/* Icon */}
                   <div className={`w-12 h-12 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-gray-100'} flex items-center justify-center mb-4`}>
-                    <Icon size={24} className={darkMode ? 'text-gray-400' : 'text-gray-700'} />
+                    <Icon size={24} className={
+                      idx === 0 ? 'text-cyan-600' :
+                      idx === 1 ? 'text-blue-600' :
+                      idx === 2 ? 'text-purple-600' :
+                      'text-green-600'
+                    } />
                   </div>
                   
                   <h3 className={`font-medium mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -1264,7 +1262,7 @@ const CertificationsSection = ({ darkMode }) => {
             viewport={{ once: true }}
             className="lg:col-span-7"
           >
-            <CertificationCarousel certifications={certifications} darkMode={darkMode} />
+            <CertificationCarousel certifications={certifications.slice(0, 4)} darkMode={darkMode} />
           </motion.div>
 
           {/* Certifications List */}
